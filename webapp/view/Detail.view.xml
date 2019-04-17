@@ -1,0 +1,133 @@
+<mvc:View
+	controllerName="zwx.sm.charm.urgentchange.controller.Detail"
+	height="100%"
+	xmlns="sap.m"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" 
+	xmlns:rt="sap.ui.richtexteditor">
+
+	<semantic:SemanticPage
+		id="detailPage"
+		showFooter="true"
+		busy="{detailView>/busy}"
+		busyIndicatorDelay="{detailView>/delay}">
+		<semantic:titleHeading>
+			<Title
+				text="{detailView>/title}"
+				level="H2"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<ObjectAttribute title="{i18n>urgentChangeId}" text="{ObjectId}"/>
+			<ObjectAttribute title="{i18n>description}" text="{Description}"/>
+			<ObjectAttribute title="{i18n>status}" text="{Status}"/>
+			<ObjectAttribute title="{i18n>changedAt}" text="{ChangedAt}"/>
+		</semantic:headerContent>
+		<semantic:content>
+			<IconTabBar
+				id="idIconTabBarSeparatorMixed"
+				expanded="true"
+				class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter icon="sap-icon://hint" iconColor="Critical" text="{i18n>ICON_TAB_DETAILS}">
+						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
+							<core:ExtensionPoint name="extFormOnDetailsTab">
+								<form:SimpleForm id="detailForm" columnsL="1" columnsM="1" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="2"
+									layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024"  busyIndicatorDelay="0">
+									<Label id="testerLabel" text="{i18n>tester}"/>
+									<Text id="testerForm" text="{Tester}"/>
+									<Label id="changeManagerLabel" text="{i18n>changeManager}"/>
+									<Text id="changeManagerForm" text="{ChangeManager}"/>
+									<Label id="basisLabel" text="{i18n>basis}"/>
+									<Text id="basisForm" text="{Basis}"/>
+									<Label id="developerLabel" text="{i18n>developer}"/>
+									<Text id="developerForm" text="{Developer}"/>
+								</form:SimpleForm>
+							</core:ExtensionPoint >
+						</ScrollContainer>
+					</IconTabFilter>
+			<IconTabSeparator icon=""/>
+			<IconTabFilter
+				icon="sap-icon://attachment"
+				iconColor="Neutral"
+				id="attachmentFilter"
+				text="{i18n>ICON_TAB_ATTACHMENTS}">
+				<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
+					<UploadCollection noDataText="{i18n>ATTACHMENT_NO_DATA_TEXT}" change="onChange" fileDeleted="onDeleteFile" fileRenamed="onFileRenamed"
+						id="fileupload" multiple="false" uploadComplete="onUploadComplete" busyIndicatorDelay="0" items="{/AttachmentSet}">
+						<items>
+							<UploadCollectionItem documentId="{documentId}" mimeType="{mimeType}" fileName="{fileName}" enableDelete="{enableDelete}"
+								enableEdit="false" visibleEdit="false" visibleDelete="false" url="{url}">
+								<attributes>
+									<ObjectAttribute title="{i18n>UPLOADED_BY}" text="{contributor}"/>
+									<ObjectAttribute title="{i18n>UPLOADED_ON}" text="{path: 'uploadDate',formatter: '.util.dateTime'}"/>
+									<ObjectAttribute title="{i18n>FILE_SIZE}" text="{path: 'fileSize',formatter: '.util.formatFileSizeAttribute'}"/>
+								</attributes>
+							</UploadCollectionItem>
+						</items>
+					</UploadCollection>
+				</ScrollContainer>
+			</IconTabFilter>
+			<IconTabSeparator icon="sap-icon://vertical-grip"/>
+			<IconTabFilter id="trFilter" icon="sap-icon://notes" iconColor="Positive" text="{i18n>ICON_TAB_TR}">
+				<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
+					<List items="{path : '/TaskListItemSet'}" > 
+						<ObjectListItem type="Navigation" title="{SysType}"
+>
+						</ObjectListItem>
+					</List>
+				</ScrollContainer>
+			</IconTabFilter>
+			<IconTabSeparator icon=""/>
+			<IconTabFilter
+				icon="sap-icon://group"
+				iconColor="Negative"
+				text="{i18n>ICON_TAB_LOG}">
+				<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
+					<List items="{path : '/TaskListItemSet'}" > 
+						<ObjectListItem type="Navigation" title="{SysType}">
+						</ObjectListItem>
+					</List>
+				</ScrollContainer>
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
+			
+		</semantic:content>
+		<!--Semantic ShareMenu Buttons-->
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction
+				id="shareEmail"
+				press=".onSendEmailPress"/>
+		</semantic:sendEmailAction>
+
+		<semantic:closeAction>
+			<semantic:CloseAction
+					id="closeColumn"
+					press=".onCloseDetailPress"/>
+		</semantic:closeAction>
+
+		<semantic:fullScreenAction>
+			<semantic:FullScreenAction
+					id="enterFullScreen"
+					visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+					press=".toggleFullScreen"/>
+		</semantic:fullScreenAction>
+		<semantic:exitFullScreenAction>
+			<semantic:ExitFullScreenAction
+					id="exitFullScreen"
+					visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+					press=".toggleFullScreen"/>
+		</semantic:exitFullScreenAction>
+		
+		<semantic:footerCustomActions>
+			<Button text="导入生产系统" />
+			<Button text="重置开发中" />
+		</semantic:footerCustomActions>
+
+	</semantic:SemanticPage>
+
+</mvc:View>
