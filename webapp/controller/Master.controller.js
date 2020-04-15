@@ -278,6 +278,8 @@ sap.ui.define([
 			// only update the counter if the length is final
 			if (this._oList.getBinding("items").isLengthFinal()) {
 				sTitle = this.getResourceBundle().getText("masterTitleCount", [iTotalItems]);
+				
+				
 				this.getModel("masterView").setProperty("/title", sTitle);
 			}
 		},

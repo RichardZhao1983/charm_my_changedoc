@@ -380,6 +380,15 @@ sap.ui.define([
 		      oUploadCollection.addHeaderParameter(oCustomerHeaderContentDisp);
 		    },
 		    
+		    onButtonPress: function(oEvent) {
+				var oButton = oEvent.getSource();
+				this.byId("actionSheet").openBy(oButton);
+			},
+			
+			onPressAccept: function(oEvent) {
+				 MessageToast.show("Accept");
+			},
+		    
 		    onUploadComplete: function (oEvent) {
 		        var that = this;
 		        var fnSuccess = function (oResponse) {
@@ -433,7 +442,7 @@ sap.ui.define([
 		            success: fnSuccess,
 		            error: fnError
 		          });
-		          sap.m.MessageToast.show(this.bundle.getText("ATTACHMENT_UPLOAD_SUCCESS"));
+		          MessageToast.show(this.bundle.getText("ATTACHMENT_UPLOAD_SUCCESS"));
 		        }
 		      }
 	});

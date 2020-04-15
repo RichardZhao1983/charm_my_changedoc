@@ -71,7 +71,6 @@
 				"dataSource": "mainService",
 				"preload": true
 			}
-			
 		},
 		"routing": {
 			"config": {
@@ -83,7 +82,15 @@
 				"bypassed": {
 					"target": "notFound"
 				},
-				"async": true
+				"async": true,
+				"sample": {
+					"files": [
+						"view/Detail.view.xml",
+						"controller/Detail.controller.js",
+						"view/ActionSheet.fragment.xml",
+						"manifest.json"
+					]
+				}
 			},
 			"routes": [
 				{

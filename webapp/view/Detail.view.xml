@@ -30,71 +30,104 @@
 			<IconTabBar
 				id="idIconTabBarSeparatorMixed"
 				expanded="true"
-				class="sapUiResponsiveContentPadding">
+				class="sapUiForceWidthAuto sapUiMediumMarginBeginEnd">
 				<items>
-					<IconTabFilter icon="sap-icon://hint" iconColor="Critical" text="{i18n>ICON_TAB_DETAILS}">
+					<IconTabFilter icon="sap-icon://activities" iconColor="Neutral" id="detailsFilter" text="{i18n>ICON_TAB_DETAILS}">
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
-							<core:ExtensionPoint name="extFormOnDetailsTab">
-								<form:SimpleForm id="detailForm" columnsL="1" columnsM="1" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="2"
-									layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024"  busyIndicatorDelay="0">
+							<core:ExtensionPoint name="extFormOnDetailsTab" >
+								<form:SimpleForm id="detailForm" class="sapUiLargeMarginBegin sapUiLargeMarginBottom"
+									editable="true"
+									layout="ResponsiveGridLayout"
+									labelSpanXL="3"
+									labelSpanL="3"
+									labelSpanM="3"
+									labelSpanS="3"
+									adjustLabelSpan="false"
+									emptySpanXL="3"
+									emptySpanL="3"
+									emptySpanM="3"
+									emptySpanS="3"
+									columnsXL="2"
+									columnsL="1"
+									columnsM="1"
+									singleContainerFullSize="false"
+									ariaLabelledBy="Title1">
 									<Label id="testerLabel" text="{i18n>tester}"/>
-									<Text id="testerForm" text="{Tester}"/>
+									<Input
+										id="testerForm"
+										type="Text"
+										value="{Tester}" enabled="false" width="300px"/>
 									<Label id="changeManagerLabel" text="{i18n>changeManager}"/>
-									<Text id="changeManagerForm" text="{ChangeManager}"/>
+									<Input
+										id="changeManagerForm"
+										type="Text"
+										value="{ChangeManager}" enabled="false" width="300px"/>
 									<Label id="basisLabel" text="{i18n>basis}"/>
-									<Text id="basisForm" text="{Basis}"/>
+									<Input
+										id="basisForm"
+										type="Text"
+										value="{Basis}" enabled="false" width="300px"/>
 									<Label id="developerLabel" text="{i18n>developer}"/>
-									<Text id="developerForm" text="{Developer}"/>
+									<Input
+										id="developerForm"
+										type="Text"
+										value="{Developer}" enabled="false" width="300px"/>
 								</form:SimpleForm>
 							</core:ExtensionPoint >
 						</ScrollContainer>
 					</IconTabFilter>
-			<IconTabSeparator icon=""/>
-			<IconTabFilter
-				icon="sap-icon://attachment"
-				iconColor="Neutral"
-				id="attachmentFilter"
-				text="{i18n>ICON_TAB_ATTACHMENTS}">
-				<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
-					<UploadCollection noDataText="{i18n>ATTACHMENT_NO_DATA_TEXT}" change="onChange" fileDeleted="onDeleteFile" fileRenamed="onFileRenamed"
-						id="fileupload" multiple="false" uploadComplete="onUploadComplete" busyIndicatorDelay="0" items="{/AttachmentSet}">
-						<items>
-							<UploadCollectionItem documentId="{documentId}" mimeType="{mimeType}" fileName="{fileName}" enableDelete="{enableDelete}"
-								enableEdit="false" visibleEdit="false" visibleDelete="false" url="{url}">
-								<attributes>
-									<ObjectAttribute title="{i18n>UPLOADED_BY}" text="{contributor}"/>
-									<ObjectAttribute title="{i18n>UPLOADED_ON}" text="{path: 'uploadDate',formatter: '.util.dateTime'}"/>
-									<ObjectAttribute title="{i18n>FILE_SIZE}" text="{path: 'fileSize',formatter: '.util.formatFileSizeAttribute'}"/>
-								</attributes>
-							</UploadCollectionItem>
-						</items>
-					</UploadCollection>
-				</ScrollContainer>
-			</IconTabFilter>
-			<IconTabSeparator icon="sap-icon://vertical-grip"/>
-			<IconTabFilter id="trFilter" icon="sap-icon://notes" iconColor="Positive" text="{i18n>ICON_TAB_TR}">
-				<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
-					<List items="{path : '/TaskListItemSet'}" > 
-						<ObjectListItem type="Navigation" title="{SysType}"
->
-						</ObjectListItem>
-					</List>
-				</ScrollContainer>
-			</IconTabFilter>
-			<IconTabSeparator icon=""/>
-			<IconTabFilter
-				icon="sap-icon://group"
-				iconColor="Negative"
-				text="{i18n>ICON_TAB_LOG}">
-				<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
-					<List items="{path : '/TaskListItemSet'}" > 
-						<ObjectListItem type="Navigation" title="{SysType}">
-						</ObjectListItem>
-					</List>
-				</ScrollContainer>
-			</IconTabFilter>
-		</items>
-	</IconTabBar>
+					
+					<IconTabFilter icon="sap-icon://calendar" iconColor="Neutral" id="dateFilter" text="{i18n>ICON_TAB_Dates}">
+						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
+							<List items="{path : '/TaskListItemSet'}" > 
+								<ObjectListItem type="Navigation" title="{SysType}">
+								</ObjectListItem>
+							</List>
+						</ScrollContainer>
+					</IconTabFilter>
+					
+					<IconTabFilter icon="sap-icon://post" iconColor="Neutral" id="textFilter" text="{i18n>ICON_TAB_Texts}">
+						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
+							<List items="{path : '/TaskListItemSet'}" > 
+								<ObjectListItem type="Navigation" title="{SysType}">
+								</ObjectListItem>
+							</List>
+						</ScrollContainer>
+					</IconTabFilter>
+					
+					<IconTabFilter
+						icon="sap-icon://attachment"
+						iconColor="Neutral"
+						id="attachmentFilter"
+						text="{i18n>ICON_TAB_ATTACHMENTS}">
+						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
+							<UploadCollection noDataText="{i18n>ATTACHMENT_NO_DATA_TEXT}" change="onChange" fileDeleted="onDeleteFile" fileRenamed="onFileRenamed"
+								id="fileupload" multiple="false" uploadComplete="onUploadComplete" busyIndicatorDelay="0" items="{/AttachmentSet}">
+								<items>
+									<UploadCollectionItem documentId="{documentId}" mimeType="{mimeType}" fileName="{fileName}" enableDelete="{enableDelete}"
+										enableEdit="false" visibleEdit="false" visibleDelete="false" url="{url}">
+										<attributes>
+											<ObjectAttribute title="{i18n>UPLOADED_BY}" text="{contributor}"/>
+											<ObjectAttribute title="{i18n>UPLOADED_ON}" text="{path: 'uploadDate',formatter: '.util.dateTime'}"/>
+											<ObjectAttribute title="{i18n>FILE_SIZE}" text="{path: 'fileSize',formatter: '.util.formatFileSizeAttribute'}"/>
+										</attributes>
+									</UploadCollectionItem>
+								</items>
+							</UploadCollection>
+						</ScrollContainer>
+					</IconTabFilter>
+			
+					<IconTabFilter id="scopeFilter" icon="sap-icon://endoscopy" iconColor="Positive" text="{i18n>ICON_TAB_SCOPE}">
+						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
+							<List items="{path : '/TaskListItemSet'}" > 
+								<ObjectListItem type="Navigation" title="{SysType}">
+								</ObjectListItem>
+							</List>
+						</ScrollContainer>
+					</IconTabFilter>
+			
+				</items>
+			</IconTabBar>
 			
 		</semantic:content>
 		<!--Semantic ShareMenu Buttons-->
@@ -124,8 +157,16 @@
 		</semantic:exitFullScreenAction>
 		
 		<semantic:footerCustomActions>
-			<Button text="导入生产系统" />
-			<Button text="重置开发中" />
+			<Button
+				text="{i18n>ACTION_BUTTON}"
+				class="sapUiSmallMargin"
+				press=".onButtonPress">
+				<dependents>
+					<core:Fragment
+						fragmentName="zwx.sm.charm.urgentchange.view.ActionSheet"
+						type="XML" />
+				</dependents>
+			</Button>
 		</semantic:footerCustomActions>
 
 	</semantic:SemanticPage>
