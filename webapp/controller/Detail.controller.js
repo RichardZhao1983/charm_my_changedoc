@@ -28,6 +28,7 @@ sap.ui.define([
 				title: this.getResourceBundle().getText("detailTitle"),
 			});
 			this.initFileAttachment();
+			this.initTextsList();
 			this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 			this.setModel(oViewModel, "detailView");
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
@@ -38,6 +39,11 @@ sap.ui.define([
 			oView.attachmentCollection = this.byId("fileupload");
 		    oView.attachmentfltr = this.byId("attachmentFilter");
 		    oView.trfltr = this.byId("trFilter");
+		},
+		
+		initTextsList : function () {
+			var oView = this.getView();
+			oView.textList = this.byId("textList");
 		},
 
 		/* =========================================================== */
@@ -117,6 +123,29 @@ sap.ui.define([
 			});
 			this.readTr(oView);
 			this.readAttachments(oView);
+			this.readTexts(oView);
+		},
+		
+		readTexts: function (oView){
+			var that = this;
+			this.jsonModelTexts = new JSONModel();
+			oView.textList.setModel(this.jsonModelTexts);
+			
+			that.TextsSet = new JSONModel([{
+	        	"name": "dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7",
+	        	"status": "loioId1",
+	        	"description": "phioId1"
+	        },
+
+	        {
+	        	"name": "dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7",
+	        	"status": "loioId2",
+	        	"description": "phioId2"
+	        }]);
+		    that.jsonModelTexts.setData({
+		    	TextsSet: that.TextsSet.getData()
+		    });
+		   
 		},
 		
 		readItems: function (oView) {
