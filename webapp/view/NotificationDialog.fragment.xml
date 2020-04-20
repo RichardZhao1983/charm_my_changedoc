@@ -1,0 +1,25 @@
+<core:FragmentDefinition 
+	xmlns:m="sap.m" 
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc">
+	<m:Dialog horizontalScrolling="true" showHeader="true" state="None" contentHeight="400px" contentWidth="500px"
+		stretch="false" title="Add Text" type="Standard"
+		verticalScrolling="true">
+		<m:content>
+			<m:TextArea id="textAreaWithBinding2" value="{/value}" showExceededText="true" maxLength="200" width="100%" height="280px" 
+				valueState="{= ${/value}.length > 200 ? 'Warning' : 'None' }" valueLiveUpdate="false" liveChange="handleLiveChange" />
+		</m:content>
+		<m:beginButton />
+		<m:buttons>
+			<m:Button text="OK" type="Default" iconFirst="true" width="auto"
+				enabled="true" visible="true" iconDensityAware="false" press="handleNotificationSelect" />
+			<m:Button text="Cancel" type="Default" iconFirst="true"
+				width="auto" enabled="true" visible="true" iconDensityAware="false"
+				press="handleNotificationCancelDialog" />
+		</m:buttons>
+		<m:customHeader />
+		<m:endButton />
+		<m:subHeader />
+	</m:Dialog>
+</core:FragmentDefinition>

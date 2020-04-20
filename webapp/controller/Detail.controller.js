@@ -3,8 +3,10 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"../model/formatter",
 	"sap/m/library",
-	'sap/m/MessageToast'
-], function (BaseController, JSONModel, formatter, mobileLibrary,MessageToast) {
+	'sap/m/MessageToast',
+	'sap/m/Dialog',
+	'sap/m/Button'
+], function (BaseController, JSONModel, formatter, mobileLibrary, MessageToast, Dialog, Button) {
 	"use strict";
 
 	// shortcut for sap.m.URLHelper
@@ -27,24 +29,22 @@ sap.ui.define([
 				delay : 0,
 				title: this.getResourceBundle().getText("detailTitle"),
 			});
-			this.initFileAttachment();
-			this.initTextsList();
+			this.initViewComponents();
 			this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 			this.setModel(oViewModel, "detailView");
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
 		},
 		
-		initFileAttachment : function () {
+		initViewComponents : function(){
 			var oView = this.getView();
 			oView.attachmentCollection = this.byId("fileupload");
 		    oView.attachmentfltr = this.byId("attachmentFilter");
 		    oView.trfltr = this.byId("trFilter");
+			oView.textList = this.byId("textList");
+			oView.scopeTable = this.byId("scopeTable");
+			oView.effertTable = this.byId("effertTable");
 		},
 		
-		initTextsList : function () {
-			var oView = this.getView();
-			oView.textList = this.byId("textList");
-		},
 
 		/* =========================================================== */
 		/* event handlers                                              */
@@ -123,10 +123,17 @@ sap.ui.define([
 			});
 			this.readTr(oView);
 			this.readAttachments(oView);
-			this.readTexts(oView);
+			this.initViewData(oView)
+			
 		},
 		
-		readTexts: function (oView){
+		initViewData : function(oView){
+			this.initTextList(oView);
+			this.initScopeTable(oView);
+			this.initEffertTable(oView);
+		},
+		
+		initTextList: function (oView){
 			var that = this;
 			this.jsonModelTexts = new JSONModel();
 			oView.textList.setModel(this.jsonModelTexts);
@@ -146,6 +153,60 @@ sap.ui.define([
 		    	TextsSet: that.TextsSet.getData()
 		    });
 		   
+		},
+		
+		initScopeTable : function (oView) {
+			var that = this;
+			this.jsonModelScope = new JSONModel();
+			oView.scopeTable.setModel(this.jsonModelScope);
+			
+			that.ScopeSet = new JSONModel([{
+	        	"type": "Work Item (NC)",
+	        	"title": "Test",
+	        	"productiveSystem": "OTO 0020226859",
+	        	"sprint": "",
+	        	"status": "Approved",
+	        	"workItemClassfication": "Fit"
+	        },
+
+	        {
+	        	"type": "Work Item (NC)",
+	        	"title": "Test",
+	        	"productiveSystem": "OTO 0020226859",
+	        	"sprint": "",
+	        	"status": "Approved",
+	        	"workItemClassfication": "Fit"
+	        }]);
+		    that.jsonModelScope.setData({
+		    	ScopeSet: that.ScopeSet.getData()
+		    });
+		},
+		
+		initEffertTable : function (oView) {
+			var that = this;
+			this.jsonModelEffert = new JSONModel();
+			oView.effertTable.setModel(this.jsonModelEffert);
+			
+			that.EffertSet = new JSONModel([{
+	        	"id": "8000016892",
+	        	"description": "LD_WP_01_Requirement_01",
+	        	"type": "Requirement",
+	        	"status": "Approved",
+	        	"relations": "Created",
+	        	"created_by": "FB R2D OST_SA_18"
+	        },
+
+	        {
+	        	"id": "8000016893",
+	        	"description": "LD_WP_01_Requirement_03",
+	        	"type": "Requirement",
+	        	"status": "Approved",
+	        	"relations": "Created",
+	        	"created_by": "FB R2D OST_SA_19"
+	        }]);
+		    that.jsonModelEffert.setData({
+		    	EffertSet: that.EffertSet.getData()
+		    });
 		},
 		
 		readItems: function (oView) {
@@ -473,7 +534,44 @@ sap.ui.define([
 		          });
 		          MessageToast.show(this.bundle.getText("ATTACHMENT_UPLOAD_SUCCESS"));
 		        }
-		      }
+		      },
+		      
+		      onAddText : function(oEvent){
+		    	  var that = this;
+//		    	  var dialog = new Dialog({
+//						icon: "sap-icon://message-information",
+//						title: "Add New Text",
+//						type: "Message",
+//						beginButton: new Button({
+//							text: "OK",
+//							press: function() {
+//								dialog.close();
+//							}
+//						}),
+//						afterClose: function() {
+//							dialog.destroy();
+//						}
+//					});
+//
+//					dialog.open();
+					
+					
+					if (!this._selectNotificationDialog) {
+						this._selectNotificationDialog = sap.ui.xmlfragment(
+								"zwx.sm.charm.urgentchange.view.NotificationDialog", this);
+						this.getView().addDependent(this._selectNotificationDialog);
+					}
+//					this.getView().setModel(new JSONModel(obj), "NotificationListSet");
+					this._selectNotificationDialog.open();
+		      },
+		      
+		      handleNotificationSelect: function(oEvent){
+					this._selectNotificationDialog.close();
+				},
+				
+				handleNotificationCancelDialog : function() {
+					this._selectNotificationDialog.close();
+				},
 	});
 
 });
