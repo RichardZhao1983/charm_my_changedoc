@@ -4,7 +4,7 @@ sap.ui.define([
 		"use strict";
 
 		var oMockServer,
-			_sAppModulePath = "zwx/sm/charm/charm_my_changedoc/charm_my_changedoc/",
+			_sAppModulePath = "zwx/sm/charm/urgentchange/",
 			_sJsonFilesModulePath = _sAppModulePath + "localService/mockdata";
 
 		return {

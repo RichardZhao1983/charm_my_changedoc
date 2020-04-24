@@ -59,69 +59,69 @@
 									<Label id="toBeTestedDueByLabel" text="{i18n>TO_BE_TESTED_DUE_BY}"/>
 									<Input
 										type="Text"
-										value="{Tester}" enabled="false" width="300px"/>
+										value="{ToBeTestedDueBy}" enabled="false" width="300px"/>
 									<Label id="CreateByLabel" text="{i18n>CREATED_BY}"/>
 									<Input
 										type="Text"
-										value="{ChangeManager}" enabled="false" width="300px"/>
+										value="{CreatedBy}" enabled="false" width="300px"/>
 									<Label id="coordinatorLabel" text="{i18n>COORDINATOR}"/>
 									<Input
 										type="Text"
-										value="{Basis}" enabled="false" width="300px"/>
+										value="{Coordinator}" enabled="false" width="300px"/>
 									<Label id="popLabel" text="{i18n>POP}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{POP}" enabled="false" width="300px"/>
 									<Label id="solutionArchitectLabel" text="{i18n>SOLUTION_ARCHITECT}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{SolutionArchitect}" enabled="false" width="300px"/>
 									<Label id="serviceTeamLabel" text="{i18n>SERVICE_TEAM}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{ServiceTeam}" enabled="false" width="300px"/>
 										
 									<core:Title text="{i18n>FORM_TITLE_CATEGORY}" />
 									<Label id="applicationCodeLabel" text="{i18n>APPLICATION_CODE}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{ApplicationCode}" enabled="false" width="300px"/>
 									<Label id="fuctionCodeLabel" text="{i18n>FUNCTION_CODE}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{FunctionCode}" enabled="false" width="300px"/>
 									<Label id="CRTypeLabel" text="{i18n>CR_TYPE}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{CRType}" enabled="false" width="300px"/>
 									
 									<core:Title text="{i18n>FORM_TITLE_ATTRIBUTES}" />	
 									<Label id="countryCodeLabel" text="{i18n>COUNTRY_CODE}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{CountryCode}" enabled="false" width="300px"/>
 									<Label id="companyCodeLabel" text="{i18n>COMPANY_CODE}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{CompanyCode}" enabled="false" width="300px"/>
 									<Label id="divisionLabel" text="{i18n>DIVISION}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{Division}" enabled="false" width="300px"/>
 									
 									<core:Title text="{i18n>FORM_TITLE_RELEASE_DATA}" />
 									<Label id="cycleIdLabel" text="{i18n>CYCLE_ID}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{CycleID}" enabled="false" width="300px"/>
 									<Label id="cycleDescriptionLabel" text="{i18n>CYCLE_DESCRIPTION}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{CycleDescription}" enabled="false" width="300px"/>
 									<Label id="cyclePhaseLabel" text="{i18n>CYCLE_PHASE}"/>
 									<Input
 										type="Text"
-										value="{Developer}" enabled="false" width="300px"/>
+										value="{CyclePhase}" enabled="false" width="300px"/>
 								</form:SimpleForm>
 							</core:ExtensionPoint >
 						</ScrollContainer>
@@ -187,7 +187,7 @@
 									<t:Column width="8rem" hAlign="Center">
 										<Label text="{i18n>SCOPE_TYPE}" />
 										<t:template>
-											<Text text="{type}" wrapping="false" />
+											<Text text="{Type}" wrapping="false" />
 										</t:template>
 									</t:Column>
 									<t:Column width="6rem" hAlign="Center">
@@ -203,21 +203,9 @@
 										</t:template>
 									</t:Column>
 									<t:Column width="6rem" hAlign="Center">
-										<Label text="{i18n>SCOPE_SPRINT}" />
-										<t:template>
-											<Label text="{sprint}" />
-										</t:template>
-									</t:Column>
-									<t:Column width="6rem" hAlign="Center">
 										<Label text="{i18n>SCOPE_STATUS}" />
 										<t:template>
 											<Label text="{status}" />
-										</t:template>
-									</t:Column>
-									<t:Column width="12rem" hAlign="Center">
-										<Label text="{i18n>SCOPE_WORK_ITEM_CLASSFICATION}" />
-										<t:template>
-											<Label text="{workItemClassfication}" />
 										</t:template>
 									</t:Column>
 								</t:columns>
@@ -237,31 +225,31 @@
 									<t:Column width="6rem" hAlign="Center">
 										<Label text="{i18n>EFFERT_ID}" />
 										<t:template>
-											<Text text="{id}" wrapping="false" />
+											<Text text="{Id}" wrapping="false" />
 										</t:template>
 									</t:Column>
 									<t:Column width="15rem" hAlign="Center">
 										<Label text="{i18n>EFFERT_DESCRIPTION}" />
 										<t:template>
-											<Text text="{description}"/>
+											<Text text="{Description}"/>
 										</t:template>
 									</t:Column>
 									<t:Column width="6rem" hAlign="Center">
 										<Label text="{i18n>EFFERT_TYPE}" />
 										<t:template>
-											<Label text="{type}" />
+											<Label text="ActivityType" />
 										</t:template>
 									</t:Column>
 									<t:Column width="6rem" hAlign="Center">
-										<Label text="{i18n>EFFERT_RELATIONS}" />
+										<Label text="{i18n>EFFERT_FUNCTION}" />
 										<t:template>
-											<Label text="{relations}" />
+											<Label text="{Function}" />
 										</t:template>
 									</t:Column>
 									<t:Column width="15rem" hAlign="Center">
-										<Label text="{i18n>EFFERT_Created_By}" />
+										<Label text="{i18n>EFFERT_WORKUNIT}" />
 										<t:template>
-											<Label text="{created_by}" />
+											<Label text="{WorkUnit}" />
 										</t:template>
 									</t:Column>
 								</t:columns>

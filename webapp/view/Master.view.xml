@@ -22,7 +22,7 @@
 				width="auto"
 				class="sapFDynamicPageAlignContent"
 				items="{
-					path : '/UrgentChangeDocSet',
+					path : '/WorkPackageSet',
 					sorter: {
 						path: 'ObjectId',
 						descending: true
@@ -62,23 +62,17 @@
 				</headerToolbar>
 				<items>
 					<ObjectListItem
-						type="Navigation"
+						type="Active"
 						press=".onSelectionChange"
-						title="{ObjectId}">
-<!-- 						<firstStatus>ObjectId -->
-<!-- 							<ObjectStatus -->
-<!-- 								text="Available" -->
-<!-- 								state="Success" /> -->
-<!-- 						</firstStatus> -->
+						title="{Description}"
+						number="{Priority}">
+						<firstStatus>
+							<ObjectStatus text="{ObjectId}" />
+						</firstStatus>
 						<attributes>
-							<ObjectAttribute text="{Description}" />
+							<ObjectAttribute text="{Type}" />
 							<ObjectAttribute text="{Status}" />
-							<ObjectAttribute text="{ChangedAt}" />
 						</attributes>
-<!-- 						<markers> -->
-<!-- 							<ObjectMarker type="Favorite" /> -->
-<!-- 							<ObjectMarker type="Flagged" /> -->
-<!-- 						</markers> -->
 					</ObjectListItem>
 				</items>
 			</List>

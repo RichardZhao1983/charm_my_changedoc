@@ -6,27 +6,15 @@
 	showCancelButton="true"
 	placement="Top">
 	<Button
-		text="Accept"
-		icon="sap-icon://accept"
+		text="To Be Developed"
 		press=".onPressAccept" />
-<!-- 		press="MessageToast.show('Selected action is ' + ${$source>/text})"  -->
+	<Button
+		text="Set to Scoping"
+		press="MessageToast.show('Selected action is ' + ${$source>/text})" />
 	<Button
 		text="Reject"
-		icon="sap-icon://decline"
 		press="MessageToast.show('Selected action is ' + ${$source>/text})" />
 	<Button
-		text="Email"
-		icon="sap-icon://email"
-		press="MessageToast.show('Selected action is ' + ${$source>/text})" />
-	<Button
-		text="Forward"
-		icon="sap-icon://forward"
-		press="MessageToast.show('Selected action is ' + ${$source>/text})" />
-	<Button
-		text="Delete"
-		icon="sap-icon://delete"
-		press="MessageToast.show('Selected action is ' + ${$source>/text})" />
-	<Button
-		text="Other"
+		text="On Hold"
 		press="MessageToast.show('Selected action is ' + ${$source>/text})" />
 </ActionSheet>

@@ -99,7 +99,7 @@
 					"target": "master"
 				},
 				{
-					"pattern": "UrgentChangeDocSet/{objectId}",
+					"pattern": "WorkPackageSet/{objectId}",
 					"name": "object",
 					"target": [
 						"master",

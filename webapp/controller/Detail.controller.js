@@ -5,8 +5,10 @@ sap.ui.define([
 	"sap/m/library",
 	'sap/m/MessageToast',
 	'sap/m/Dialog',
-	'sap/m/Button'
-], function (BaseController, JSONModel, formatter, mobileLibrary, MessageToast, Dialog, Button) {
+	'sap/m/Button',
+	'sap/m/MessagePopover',
+	'sap/m/MessagePopoverItem'
+], function (BaseController, JSONModel, formatter, mobileLibrary, MessageToast, Dialog, Button,MessagePopover,MessagePopoverItem) {
 	"use strict";
 
 	// shortcut for sap.m.URLHelper
@@ -82,9 +84,12 @@ sap.ui.define([
 			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
 
 			this.getModel().metadataLoaded().then( function() {
-				var sObjectPath = this.getModel().createKey("UrgentChangeDocSet", {
+				var sObjectPath = this.getModel().createKey("WorkPackageSet", {
 					ObjectId :  sObjectId
 				});
+//				var sObjectPath = this.getModel().createKey("UrgentChangeDocSet", {
+//					ObjectId :  sObjectId
+//				});
 				this._bindView("/" + sObjectPath);
 			}.bind(this));
 		},
@@ -129,8 +134,8 @@ sap.ui.define([
 		
 		initViewData : function(oView){
 			this.initTextList(oView);
-			this.initScopeTable(oView);
-			this.initEffertTable(oView);
+//			this.initScopeTable(oView);
+//			this.initEffertTable(oView);
 		},
 		
 		initTextList: function (oView){
@@ -156,57 +161,9 @@ sap.ui.define([
 		},
 		
 		initScopeTable : function (oView) {
-			var that = this;
-			this.jsonModelScope = new JSONModel();
-			oView.scopeTable.setModel(this.jsonModelScope);
-			
-			that.ScopeSet = new JSONModel([{
-	        	"type": "Work Item (NC)",
-	        	"title": "Test",
-	        	"productiveSystem": "OTO 0020226859",
-	        	"sprint": "",
-	        	"status": "Approved",
-	        	"workItemClassfication": "Fit"
-	        },
-
-	        {
-	        	"type": "Work Item (NC)",
-	        	"title": "Test",
-	        	"productiveSystem": "OTO 0020226859",
-	        	"sprint": "",
-	        	"status": "Approved",
-	        	"workItemClassfication": "Fit"
-	        }]);
-		    that.jsonModelScope.setData({
-		    	ScopeSet: that.ScopeSet.getData()
-		    });
 		},
 		
 		initEffertTable : function (oView) {
-			var that = this;
-			this.jsonModelEffert = new JSONModel();
-			oView.effertTable.setModel(this.jsonModelEffert);
-			
-			that.EffertSet = new JSONModel([{
-	        	"id": "8000016892",
-	        	"description": "LD_WP_01_Requirement_01",
-	        	"type": "Requirement",
-	        	"status": "Approved",
-	        	"relations": "Created",
-	        	"created_by": "FB R2D OST_SA_18"
-	        },
-
-	        {
-	        	"id": "8000016893",
-	        	"description": "LD_WP_01_Requirement_03",
-	        	"type": "Requirement",
-	        	"status": "Approved",
-	        	"relations": "Created",
-	        	"created_by": "FB R2D OST_SA_19"
-	        }]);
-		    that.jsonModelEffert.setData({
-		    	EffertSet: that.EffertSet.getData()
-		    });
 		},
 		
 		readItems: function (oView) {
@@ -571,6 +528,25 @@ sap.ui.define([
 				
 				handleNotificationCancelDialog : function() {
 					this._selectNotificationDialog.close();
+				},
+				
+				onMessagesButtonPress: function(oEvent) {
+					var oMessagesButton = oEvent.getSource();
+
+					if (!this._messagePopover) {
+						this._messagePopover = new MessagePopover({
+							items: {
+								path: "message>/",
+								template: new MessagePopoverItem({
+									description: "{message>description}",
+									type: "{message>type}",
+									title: "{message>message}"
+								})
+							}
+						});
+						oMessagesButton.addDependent(this._messagePopover);
+					}
+					this._messagePopover.toggle(oMessagesButton);
 				},
 	});
 

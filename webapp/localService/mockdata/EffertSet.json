@@ -1,0 +1,18 @@
+[{
+    	"Id": "8000019235",
+    	"Actions": "delete",
+    	"ActivityType": "ATOS TH",
+    	"Function": "Human Resource",
+    	"Description": "Created",
+    	"WorkUnit":"8 Hours"
+    },
+
+    {
+    	"Id": "8000019236",
+    	"Actions": "delete",
+    	"ActivityType": "ATOS CN",
+    	"Function": "Logistics",
+    	"Description": "Created",
+    	"WorkUnit":"8 Hours"
+   	}
+]
