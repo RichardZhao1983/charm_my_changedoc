@@ -1,5 +1,7 @@
 .idea/
 /bin
+/dist
+/node_modules
 .settings
 logs
 reports
@@ -16,6 +18,8 @@ hs_err_pid*
 
 target/
 targets/
+node_modules/
+dist/
 documentation/docs-gen
 
 consumer-test/**/workspace

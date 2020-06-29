@@ -126,7 +126,7 @@ sap.ui.define([
 					}
 				}
 			});
-			this.readTr(oView);
+//			this.readTr(oView);
 			this.readAttachments(oView);
 			this.initViewData(oView)
 			
@@ -187,7 +187,7 @@ sap.ui.define([
 			var that = this;
 			var fnSuccess = function (oResponse) {
 		        that.oTaskListItemSet = oResponse.results;
-		        that.oView.trfltr.setCount(oResponse.results.length);
+//		        that.oView.trfltr.setCount(oResponse.results.length);
 		    };
 		    
 		    var fnError = function (oResponse) {

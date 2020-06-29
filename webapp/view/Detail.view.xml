@@ -24,16 +24,24 @@
 		</semantic:titleHeading>
 		
 		<semantic:headerContent alignItems="Right">
-			<ObjectAttribute  alignItems="Right" text="{ObjectId}" />
-			<ObjectAttribute  alignItems="Right" text="{Status}"/>
-			<ObjectAttribute  alignItems="Right" text="Work Package"/>
+			<FlexBox alignItems="Start" justifyContent="End">
+			   <items>
+			      <Panel backgroundDesign="Transparent">
+			         <content>
+			            <ObjectAttribute  alignItems="Right" text="{ObjectId}" />
+						<ObjectAttribute  alignItems="Right" text="{Status}"/>
+						<ObjectAttribute  alignItems="Right" text="Work Package"/>
+			         </content>
+			      </Panel>
+			   </items>
+			</FlexBox>
 		</semantic:headerContent>
 
-		<semantic:content>
+		<semantic:content width="100%">
 			<IconTabBar
 				id="idIconTabBarSeparatorMixed"
 				expanded="true"
-				class="sapUiForceWidthAuto sapUiMediumMarginBeginEnd">
+				class="">
 				<items>
 					<IconTabFilter icon="sap-icon://activities" iconColor="Neutral" id="detailsFilter" text="{i18n>ICON_TAB_DETAILS}">
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
@@ -41,87 +49,87 @@
 								<form:SimpleForm id="detailForm" class="sapUiLargeMarginBegin sapUiLargeMarginBottom"
 									editable="true"
 									layout="ResponsiveGridLayout"
-									labelSpanXL="3"
-									labelSpanL="3"
-									labelSpanM="3"
-									labelSpanS="3"
-									adjustLabelSpan="false"
+									labelSpanXL="4"
+									labelSpanL="4"
+									labelSpanM="4"
+									labelSpanS="4"
+									adjustLabelSpan="true"
 									emptySpanXL="3"
 									emptySpanL="3"
 									emptySpanM="3"
-									emptySpanS="3"
-									columnsXL="2"
-									columnsL="1"
-									columnsM="1"
-									singleContainerFullSize="false"
+									emptySpanS="2"
+									columnsXL="-1"
+									columnsL="2"
+									columnsM="2"
+									singleContainerFullSize="true"
 									ariaLabelledBy="Title1">
 									<core:Title text="{i18n>FORM_TITLE_GENERAL_DATA}" />
 									<Label id="toBeTestedDueByLabel" text="{i18n>TO_BE_TESTED_DUE_BY}"/>
 									<Input
 										type="Text"
-										value="{ToBeTestedDueBy}" enabled="false" width="300px"/>
+										value="{ToBeTestedDueBy}" enabled="false" width="150px"/>
 									<Label id="CreateByLabel" text="{i18n>CREATED_BY}"/>
 									<Input
 										type="Text"
-										value="{CreatedBy}" enabled="false" width="300px"/>
+										value="{CreatedBy}" enabled="false" width="150px"/>
 									<Label id="coordinatorLabel" text="{i18n>COORDINATOR}"/>
 									<Input
 										type="Text"
-										value="{Coordinator}" enabled="false" width="300px"/>
+										value="{Coordinator}" enabled="false" width="150px"/>
 									<Label id="popLabel" text="{i18n>POP}"/>
 									<Input
 										type="Text"
-										value="{POP}" enabled="false" width="300px"/>
+										value="{POP}" enabled="false" width="150px"/>
 									<Label id="solutionArchitectLabel" text="{i18n>SOLUTION_ARCHITECT}"/>
 									<Input
 										type="Text"
-										value="{SolutionArchitect}" enabled="false" width="300px"/>
+										value="{SolutionArchitect}" enabled="false" width="150px"/>
 									<Label id="serviceTeamLabel" text="{i18n>SERVICE_TEAM}"/>
 									<Input
 										type="Text"
-										value="{ServiceTeam}" enabled="false" width="300px"/>
+										value="{ServiceTeam}" enabled="false" width="150px"/>
 										
 									<core:Title text="{i18n>FORM_TITLE_CATEGORY}" />
 									<Label id="applicationCodeLabel" text="{i18n>APPLICATION_CODE}"/>
 									<Input
 										type="Text"
-										value="{ApplicationCode}" enabled="false" width="300px"/>
+										value="{ApplicationCode}" enabled="false" width="150px"/>
 									<Label id="fuctionCodeLabel" text="{i18n>FUNCTION_CODE}"/>
 									<Input
 										type="Text"
-										value="{FunctionCode}" enabled="false" width="300px"/>
+										value="{FunctionCode}" enabled="false" width="150px"/>
 									<Label id="CRTypeLabel" text="{i18n>CR_TYPE}"/>
 									<Input
 										type="Text"
-										value="{CRType}" enabled="false" width="300px"/>
+										value="{CRType}" enabled="false" width="150px"/>
 									
 									<core:Title text="{i18n>FORM_TITLE_ATTRIBUTES}" />	
 									<Label id="countryCodeLabel" text="{i18n>COUNTRY_CODE}"/>
 									<Input
 										type="Text"
-										value="{CountryCode}" enabled="false" width="300px"/>
+										value="{CountryCode}" enabled="false" width="150px"/>
 									<Label id="companyCodeLabel" text="{i18n>COMPANY_CODE}"/>
 									<Input
 										type="Text"
-										value="{CompanyCode}" enabled="false" width="300px"/>
+										value="{CompanyCode}" enabled="false" width="150px"/>
 									<Label id="divisionLabel" text="{i18n>DIVISION}"/>
 									<Input
 										type="Text"
-										value="{Division}" enabled="false" width="300px"/>
+										value="{Division}" enabled="false" width="150px"/>
 									
 									<core:Title text="{i18n>FORM_TITLE_RELEASE_DATA}" />
 									<Label id="cycleIdLabel" text="{i18n>CYCLE_ID}"/>
 									<Input
 										type="Text"
-										value="{CycleID}" enabled="false" width="300px"/>
+										value="{CycleID}" enabled="false" width="150px"/>
 									<Label id="cycleDescriptionLabel" text="{i18n>CYCLE_DESCRIPTION}"/>
 									<Input
 										type="Text"
-										value="{CycleDescription}" enabled="false" width="300px"/>
+										value="{CycleDescription}" enabled="false" width="150px"/>
 									<Label id="cyclePhaseLabel" text="{i18n>CYCLE_PHASE}"/>
 									<Input
 										type="Text"
-										value="{CyclePhase}" enabled="false" width="300px"/>
+										value="{CyclePhase}" enabled="false" width="150px"/>
 								</form:SimpleForm>
 							</core:ExtensionPoint >
 						</ScrollContainer>
@@ -215,45 +223,83 @@
 					
 					<IconTabFilter icon="sap-icon://calendar" iconColor="Neutral" id="dateFilter" text="{i18n>ICON_TAB_EFFORT}">
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
-							<t:Table id="effertTable" rows="{/EffertSet}" selectionMode="None" visibleRowCount="7" paste="onPaste" ariaLabelledBy="title">
-								<t:extension>
-									<OverflowToolbar>
-										<Title id="title" text="{i18n>EFFERT_TABLE_TITLE}"/>
-									</OverflowToolbar>
-								</t:extension>
-								<t:columns>
-									<t:Column width="6rem" hAlign="Center">
-										<Label text="{i18n>EFFERT_ID}" />
-										<t:template>
-											<Text text="{Id}" wrapping="false" />
-										</t:template>
-									</t:Column>
-									<t:Column width="15rem" hAlign="Center">
-										<Label text="{i18n>EFFERT_DESCRIPTION}" />
-										<t:template>
-											<Text text="{Description}"/>
-										</t:template>
-									</t:Column>
-									<t:Column width="6rem" hAlign="Center">
-										<Label text="{i18n>EFFERT_TYPE}" />
-										<t:template>
-											<Label text="ActivityType" />
-										</t:template>
-									</t:Column>
-									<t:Column width="6rem" hAlign="Center">
-										<Label text="{i18n>EFFERT_FUNCTION}" />
-										<t:template>
-											<Label text="{Function}" />
-										</t:template>
-									</t:Column>
-									<t:Column width="15rem" hAlign="Center">
-										<Label text="{i18n>EFFERT_WORKUNIT}" />
-										<t:template>
-											<Label text="{WorkUnit}" />
-										</t:template>
-									</t:Column>
-								</t:columns>
-							</t:Table>
+<!-- 							<t:Table id="effertTable" rows="{/EffertSet}" selectionMode="None" visibleRowCount="7" paste="onPaste" ariaLabelledBy="title"> -->
+<!-- 								<t:extension> -->
+<!-- 									<OverflowToolbar> -->
+<!-- 										<Title id="title" text="{i18n>EFFERT_TABLE_TITLE}"/> -->
+<!-- 									</OverflowToolbar> -->
+<!-- 								</t:extension> -->
+<!-- 								<t:columns> -->
+<!-- 									<t:Column width="6rem" hAlign="Center"> -->
+<!-- 										<Label text="{i18n>EFFERT_ID}" /> -->
+<!-- 										<t:template> -->
+<!-- 											<Text text="{Id}" wrapping="false" /> -->
+<!-- 										</t:template> -->
+<!-- 									</t:Column> -->
+<!-- 									<t:Column width="15rem" hAlign="Center"> -->
+<!-- 										<Label text="{i18n>EFFERT_DESCRIPTION}" /> -->
+<!-- 										<t:template> -->
+<!-- 											<Text text="{Description}"/> -->
+<!-- 										</t:template> -->
+<!-- 									</t:Column> -->
+<!-- 									<t:Column width="6rem" hAlign="Center"> -->
+<!-- 										<Label text="{i18n>EFFERT_TYPE}" /> -->
+<!-- 										<t:template> -->
+<!-- 											<Label text="ActivityType" /> -->
+<!-- 										</t:template> -->
+<!-- 									</t:Column> -->
+<!-- 									<t:Column width="6rem" hAlign="Center"> -->
+<!-- 										<Label text="{i18n>EFFERT_FUNCTION}" /> -->
+<!-- 										<t:template> -->
+<!-- 											<Label text="{Function}" /> -->
+<!-- 										</t:template> -->
+<!-- 									</t:Column> -->
+<!-- 									<t:Column width="15rem" hAlign="Center"> -->
+<!-- 										<Label text="{i18n>EFFERT_WORKUNIT}" /> -->
+<!-- 										<t:template> -->
+<!-- 											<Label text="{WorkUnit}" /> -->
+<!-- 										</t:template> -->
+<!-- 									</t:Column> -->
+<!-- 								</t:columns> -->
+<!-- 							</t:Table> -->
+								<Table id="effertTable" inset="false"
+									items="{
+										path: '/EffertSet'
+										
+									}">
+									<columns>
+										<Column width="5rem">
+											<Text text="Id" />
+										</Column>
+										<Column >
+											<Text text="Actions" />
+										</Column>
+										<Column width="5rem"> 
+											<Text text="ActivityType" />
+										</Column>
+										<Column>
+											<Text text="Function" />
+										</Column>
+										<Column  minScreenWidth="Tablet" demandPopin="true">
+											<Text text="Description" />
+										</Column>
+										<Column  minScreenWidth="Tablet" demandPopin="true">
+											<Text text="WorkUnit" />
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<ObjectIdentifier text="{Id}"/>
+												<Text text="{Actions}" />
+												<Text text="{ActivityType}" />
+												<Text text="{Function}" />
+												<Text text="{Description}" />
+												<Text text="{WorkUnit}" />
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
 						</ScrollContainer>
 					</IconTabFilter>
 			
