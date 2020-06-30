@@ -97,12 +97,47 @@ sap.ui.define([
 			var sQuery = oEvent.getParameter("query");
 
 			if (sQuery) {
-				this._oListFilterState.aSearch = [new Filter("ObjectId", FilterOperator.Contains, sQuery)];
+//				this._oListFilterState.aSearch = [new Filter("ObjectId", FilterOperator.Contains, sQuery)];
+				var oFilter1 = new Filter("ObjectId", FilterOperator.Contains, sQuery);
+				var oFilter2 = new Filter("CreatedDate", FilterOperator.Contains, sQuery);
+				var oFilter3 = new Filter("Country", FilterOperator.Contains, sQuery);
+				this._oListFilterState.aSearch = [oFilter1,oFilter2,oFilter3];
 			} else {
 				this._oListFilterState.aSearch = [];
 			}
 			this._applyFilterSearch();
 
+		},
+		
+		/**
+		 * Internal helper method to apply both filter and search state together on the list binding
+		 * @private
+		 */
+		_applyFilterSearch : function () {
+			var aFilters = this._oListFilterState.aSearch.concat(this._oListFilterState.aFilter),
+				oViewModel = this.getModel("masterView");
+			if(aFilters.length > 0){
+				aFilters = new Filter(aFilters, false);
+			}
+			this._oList.getBinding("items").filter(aFilters, "Application");
+			// changes the noDataText of the list in case there are no filter results
+			if (aFilters.length !== 0) {
+				oViewModel.setProperty("/noDataText", this.getResourceBundle().getText("masterListNoDataWithFilterOrSearchText"));
+			} else if (this._oListFilterState.aSearch.length > 0) {
+				// only reset the no data text to default when no new search was triggered
+				oViewModel.setProperty("/noDataText", this.getResourceBundle().getText("masterListNoDataText"));
+			}
+		},
+
+		/**
+		 * Internal helper method that sets the filter bar visibility property and the label's caption to be shown
+		 * @param {string} sFilterBarText the selected filter value
+		 * @private
+		 */
+		_updateFilterBar : function (sFilterBarText) {
+			var oViewModel = this.getModel("masterView");
+			oViewModel.setProperty("/isFilterBarVisible", (this._oListFilterState.aFilter.length > 0));
+			oViewModel.setProperty("/filterBarLabel", this.getResourceBundle().getText("masterFilterBarText", [sFilterBarText]));
 		},
 
 		/**
@@ -284,33 +319,7 @@ sap.ui.define([
 			}
 		},
 
-		/**
-		 * Internal helper method to apply both filter and search state together on the list binding
-		 * @private
-		 */
-		_applyFilterSearch : function () {
-			var aFilters = this._oListFilterState.aSearch.concat(this._oListFilterState.aFilter),
-				oViewModel = this.getModel("masterView");
-			this._oList.getBinding("items").filter(aFilters, "Application");
-			// changes the noDataText of the list in case there are no filter results
-			if (aFilters.length !== 0) {
-				oViewModel.setProperty("/noDataText", this.getResourceBundle().getText("masterListNoDataWithFilterOrSearchText"));
-			} else if (this._oListFilterState.aSearch.length > 0) {
-				// only reset the no data text to default when no new search was triggered
-				oViewModel.setProperty("/noDataText", this.getResourceBundle().getText("masterListNoDataText"));
-			}
-		},
-
-		/**
-		 * Internal helper method that sets the filter bar visibility property and the label's caption to be shown
-		 * @param {string} sFilterBarText the selected filter value
-		 * @private
-		 */
-		_updateFilterBar : function (sFilterBarText) {
-			var oViewModel = this.getModel("masterView");
-			oViewModel.setProperty("/isFilterBarVisible", (this._oListFilterState.aFilter.length > 0));
-			oViewModel.setProperty("/filterBarLabel", this.getResourceBundle().getText("masterFilterBarText", [sFilterBarText]));
-		}
+		
 
 	});
 

@@ -18,7 +18,9 @@
     	"CRType": "Regional CR",
     	"CountryCode": "CN",
     	"CompanyCode": "D501 SMTB Beijing",
-    	"Division": "SHS"
+    	"Division": "SHS",
+    	"Country":"CN",
+    	"CreatedDate":"2020-02-06"
     },
 
     {
@@ -41,6 +43,8 @@
     	"CRType": "Regional CR1",
     	"CountryCode": "CN",
     	"CompanyCode": "D501 SMTB Beijing1",
-    	"Division": "SHS1"
+    	"Division": "SHS1",
+    	"Country":"US",
+    	"CreatedDate":"2019-02-07"
     }
 ]
