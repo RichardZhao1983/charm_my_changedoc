@@ -82,7 +82,7 @@
 	</servlet-mapping>
 	<context-param>
         <param-name>com.sap.ui5.proxy.REMOTE_LOCATION</param-name>
-        <param-value>http://mo-053fd00eb.mo.sap.corp:50000</param-value>
+        <param-value>https://saphasg4.siemens.com.sg:8200</param-value>
     </context-param>
 
 	<!-- ============================================================== -->

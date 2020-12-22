@@ -34,7 +34,7 @@ sap.ui.define([
 				// taken care of by the master list itself.
 				iOriginalBusyDelay = oList.getBusyIndicatorDelay();
 
-
+//			this.oSemanticPage = this.byId("masterPage");
 			this._oList = oList;
 			// keeps the filter and search state
 			this._oListFilterState = {
@@ -57,6 +57,7 @@ sap.ui.define([
 				}.bind(this)
 			});
 
+//			this.initFilterView();
 			this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 			this.getRouter().attachBypassed(this.onBypassed, this);
 		},
@@ -95,13 +96,9 @@ sap.ui.define([
 			}
 
 			var sQuery = oEvent.getParameter("query");
-
 			if (sQuery) {
-//				this._oListFilterState.aSearch = [new Filter("ObjectId", FilterOperator.Contains, sQuery)];
-				var oFilter1 = new Filter("ObjectId", FilterOperator.Contains, sQuery);
-				var oFilter2 = new Filter("CreatedDate", FilterOperator.Contains, sQuery);
-				var oFilter3 = new Filter("Country", FilterOperator.Contains, sQuery);
-				this._oListFilterState.aSearch = [oFilter1,oFilter2,oFilter3];
+				var oFilter1 = new Filter("ObjectIdOrCountryCode", FilterOperator.Contains, sQuery);
+				this._oListFilterState.aSearch = [oFilter1];
 			} else {
 				this._oListFilterState.aSearch = [];
 			}
@@ -116,8 +113,8 @@ sap.ui.define([
 		_applyFilterSearch : function () {
 			var aFilters = this._oListFilterState.aSearch.concat(this._oListFilterState.aFilter),
 				oViewModel = this.getModel("masterView");
-			if(aFilters.length > 0){
-				aFilters = new Filter(aFilters, false);
+			if(aFilters.length > 1){
+				aFilters = new Filter(aFilters, true);
 			}
 			this._oList.getBinding("items").filter(aFilters, "Application");
 			// changes the noDataText of the list in case there are no filter results
@@ -281,6 +278,7 @@ sap.ui.define([
 		_onMasterMatched :  function() {
 			//Set the layout property of the FCL control to 'OneColumn'
 			this.getModel("appView").setProperty("/layout", "OneColumn");
+//			this._applyFilter();
 		},
 		
 		
@@ -297,7 +295,8 @@ sap.ui.define([
 			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
 			
 			this.getRouter().navTo("object", {
-				objectId : oItem.getBindingContext().getProperty("ObjectId")
+//				objectId : oItem.getBindingContext().getProperty("ObjectId"),
+				guid : oItem.getBindingContext().getProperty("GUID")
 			}, bReplace);
 			
 			
@@ -318,9 +317,108 @@ sap.ui.define([
 				this.getModel("masterView").setProperty("/title", sTitle);
 			}
 		},
-
 		
+		showFooter : function() {
+			this.oSemanticPage.setShowFooter(!this.oSemanticPage.getShowFooter());
+		},
+		
+		onFilterButtonPress : function() {
+//			this._openDialog("DialogPreselected", "filter");
+			
+			if (!this.filterDialog) {
+				this.filterDialog = sap.ui.xmlfragment(
+						"zwx.sm.charm.urgentchange.view.FilterDialog", this);
+				this.getView().addDependent(this.filterDialog);
+			}
+			this.filterDialog.open();
+		},
+		
+		_openDialog : function (sName, sPage, fInit) {
 
+			// creates dialog list if not yet created
+			if (!this._oDialogs) {
+				this._oDialogs = {};
+			}
+
+			// creates requested dialog if not yet created
+			if (!this._oDialogs[sName]) {
+				Fragment.load({
+					name: "zwx.sm.charm.urgentchange.view" + sName,
+					controller: this
+				}).then(function(oDialog){
+					this._oDialogs[sName] = oDialog;
+					this.getView().addDependent(this._oDialogs[sName]);
+					if (fInit) {
+						fInit(this._oDialogs[sName]);
+					}
+					// opens the dialog
+					this._oDialogs[sName].open(sPage);
+				}.bind(this));
+			} else {
+				// opens the requested dialog
+				this._oDialogs[sName].open(sPage);
+			}
+		},
+		
+		_applyFilter : function() {
+			var currentUser = "currentUser";
+			var oFilterCreatedBy = new Filter("CreatedBy",FilterOperator.EQ, currentUser),
+			 	oFilterSolutionArchitect = new Filter("SolutionArchitect",FilterOperator.EQ, currentUser),
+			 	oFilterPOP = new Filter("POP",FilterOperator.EQ, currentUser),
+			 	oFilterCoordinator = new Filter("Coordinator",FilterOperator.EQ, currentUser);
+			
+//			var filterArray = [];
+			this._oListFilterState.aFilter = [];
+			var filterViewModel = this.getModel("filterView");
+			if(filterViewModel != null){
+				if(filterViewModel.getData().CreatedBy === true){
+					this._oListFilterState.aFilter.push(oFilterCreatedBy);
+				}
+				if(filterViewModel.getData().SolutionArchitect === true){
+					this._oListFilterState.aFilter.push(oFilterSolutionArchitect);
+				}
+				if(filterViewModel.getData().POP === true){
+					this._oListFilterState.aFilter.push(oFilterPOP);
+				}
+				if(filterViewModel.getData().Coordinator === true){
+					this._oListFilterState.aFilter.push(oFilterCoordinator);
+				}
+//				var aFilters = new Filter(filterArray, true);
+//				this._oList.getBinding("items").filter(aFilters);
+			}
+			this._applyFilterSearch();
+		},
+		
+		initFilterView :  function() {
+			var filterViewModel = new JSONModel({
+				CreatedBy : true,
+				SolutionArchitect : true,
+				POP : true,
+				Coordinator : true,
+			});
+			this.setModel(filterViewModel, "filterView");
+		},
+		
+		handleConfirm: function (oEvent) {
+			if (oEvent.getParameters().filterString) {
+				MessageToast.show(oEvent.getParameters().filterString);
+			}
+			this._applyFilter();
+		},
+		
+		onCreateDateSearchButtonPress: function (oEvent) {
+			var startDate = this.byId("createDateRange").getDateValue();
+			var endDate = this.byId("createDateRange").getSecondDateValue();
+			MessageToast.show(startDate+"  "+endDate);
+			if (startDate != null && endDate!= null) {
+				var oFilter3 = new Filter({path: "CreatedDate",  operator: FilterOperator.BT, value1: startDate, value2: endDate});
+				this._oListFilterState.aSearch = [oFilter3];
+			} else {
+				this._oListFilterState.aSearch = [];
+			}
+			this._applyFilterSearch();
+		}
+		
 	});
 
 });

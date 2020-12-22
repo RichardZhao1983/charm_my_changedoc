@@ -1,16 +1,22 @@
 [{
-		"ObjectId": "1000001",
+		"ObjectID": "1000001",
+		"Description": "Test",
 		"Type": "Work Item (NC)",
+		"TypeID": "Work Item (NC)",
 		"title": "Test",
-		"productiveSystem": "OTO 0020226858",
-		"status": "Approved"
+		"ProductiveSystem": "OTO 0020226858",
+		"Status": "Approved",
+		"Index": "1000001"
 	},
 
 	{
-		"ObjectId": "1000002",
+		"ObjectID": "1000002",
+		"Description": "Test",
 		"Type": "Work Item (NC)",
+		"TypeID": "Work Item (NC)",
 		"title": "Test",
-		"productiveSystem": "OTO 0020226859",
-		"status": "Approved"
+		"ProductiveSystem": "OTO 0020226859",
+		"Status": "Approved",
+		"Index": "1000001"
 	}
 ]

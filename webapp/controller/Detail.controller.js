@@ -7,8 +7,9 @@ sap.ui.define([
 	'sap/m/Dialog',
 	'sap/m/Button',
 	'sap/m/MessagePopover',
-	'sap/m/MessagePopoverItem'
-], function (BaseController, JSONModel, formatter, mobileLibrary, MessageToast, Dialog, Button,MessagePopover,MessagePopoverItem) {
+	'sap/m/MessagePopoverItem',
+	"sap/ui/core/ValueState"
+], function (BaseController, JSONModel, formatter, mobileLibrary, MessageToast, Dialog, Button,MessagePopover,MessagePopoverItem,ValueState) {
 	"use strict";
 
 	// shortcut for sap.m.URLHelper
@@ -23,6 +24,7 @@ sap.ui.define([
 		/* =========================================================== */
 
 		onInit : function () {
+			
 			// Model used to manipulate control states. The chosen values make sure,
 			// detail page is busy indication immediately so there is no break in
 			// between the busy indication for loading the view's meta data
@@ -35,6 +37,26 @@ sap.ui.define([
 			this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 			this.setModel(oViewModel, "detailView");
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+			
+		},
+		
+		/* =========================================================== */
+		/* begin: internal methods                                     */
+		/* =========================================================== */
+
+		_onObjectMatched : function (oEvent) {
+			var sObjectId =  oEvent.getParameter("arguments").objectId;
+			var sGUID =  oEvent.getParameter("arguments").guid;
+			
+			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
+
+			this.getModel().metadataLoaded().then( function() {
+				var sObjectPath = this.getModel().createKey("WorkPackageSet", {
+					ObjectId :  sObjectId,
+					GUID : sGUID
+				});
+				this._bindView("/" + sObjectPath);
+			}.bind(this));
 		},
 		
 		initViewComponents : function(){
@@ -68,31 +90,7 @@ sap.ui.define([
 
 
 
-		/* =========================================================== */
-		/* begin: internal methods                                     */
-		/* =========================================================== */
-
-		/**
-		 * Binds the view to the object path and expands the aggregated line items.
-		 * @function
-		 * @param {sap.ui.base.Event} oEvent pattern match event in route 'object'
-		 * @private
-		 */
-		_onObjectMatched : function (oEvent) {
-			var sObjectId =  oEvent.getParameter("arguments").objectId;
-			
-			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
-
-			this.getModel().metadataLoaded().then( function() {
-				var sObjectPath = this.getModel().createKey("WorkPackageSet", {
-					ObjectId :  sObjectId
-				});
-//				var sObjectPath = this.getModel().createKey("UrgentChangeDocSet", {
-//					ObjectId :  sObjectId
-//				});
-				this._bindView("/" + sObjectPath);
-			}.bind(this));
-		},
+		
 
 		/**
 		 * Binds the view to the object path. Makes sure that detail view displays
@@ -113,7 +111,6 @@ sap.ui.define([
 
 			// If the view was not bound yet its not busy, only if the binding requests data it is set to busy again
 			oViewModel.setProperty("/busy", false);
-			
 			this.getView().bindElement({
 				path : sObjectPath,
 				events: {
@@ -126,44 +123,6 @@ sap.ui.define([
 					}
 				}
 			});
-//			this.readTr(oView);
-			this.readAttachments(oView);
-			this.initViewData(oView)
-			
-		},
-		
-		initViewData : function(oView){
-			this.initTextList(oView);
-//			this.initScopeTable(oView);
-//			this.initEffertTable(oView);
-		},
-		
-		initTextList: function (oView){
-			var that = this;
-			this.jsonModelTexts = new JSONModel();
-			oView.textList.setModel(this.jsonModelTexts);
-			
-			that.TextsSet = new JSONModel([{
-	        	"name": "dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7",
-	        	"status": "loioId1",
-	        	"description": "phioId1"
-	        },
-
-	        {
-	        	"name": "dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7",
-	        	"status": "loioId2",
-	        	"description": "phioId2"
-	        }]);
-		    that.jsonModelTexts.setData({
-		    	TextsSet: that.TextsSet.getData()
-		    });
-		   
-		},
-		
-		initScopeTable : function (oView) {
-		},
-		
-		initEffertTable : function (oView) {
 		},
 		
 		readItems: function (oView) {
@@ -218,76 +177,10 @@ sap.ui.define([
 		    	error: fnError
 		    });
 		    
-		    that.oAttachmentSet = new JSONModel([{
-	        	"refGuid": "dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7",
-	        	"loioId": "loioId1",
-	        	"phioId": "phioId1",
-	        	"documentId": "refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId1',phioId='phioId1'",
-	        	"fileName": "Problem_Desription.docx",
-	        	"fileSize": "000000101276",
-	        	"mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-	        	"language": "E",
-	        	"uploadDateFormatted": "uploadDateFormatted 1",
-	        	"uploadDate": "/Date(1444035581000)/",
-	        	"userName": "JACK",
-	        	"contributor": "Max Mock",
-	        	"document": "01110011010100111111111010011111",
-	        	"thumbnailUrl": "thumbnailUrl 1",
-	        	"enableEdit": false,
-	        	"enableDelete": true,
-	        	"visibleDelete": true,
-	        	"visibleEdit": false,
-	        	"url": "url 1",
-	        	"__metadata": {
-	        		"uri": "AttachmentSet(refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId1',phioId='phioId1')",
-	        		"type": "AI_CRM_GW_MYMESSAGE_SRV.Attachment"
-	        	},
-	        	"MessageResultSet": {
-	        		"__deferred": {
-	        			"uri": "AttachmentSet(refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId1',phioId='phioId1')/MessageResultSet"
-	        		}
-	        	}
-
-	        },
-
-	        {
-	        	"refGuid": "dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7",
-	        	"loioId": "loioId2",
-	        	"phioId": "phioId2",
-	        	"documentId": "refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId2',phioId='phioId2'",
-	        	"fileName": "Screenshot.jpg",
-	        	"fileSize": "000000192276",
-	        	"mimeType": "image/jpeg",
-	        	"language": "E",
-	        	"uploadDateFormatted": "uploadDateFormatted 1",
-	        	"uploadDate": "/Date(1487945581000)/",
-	        	"userName": "JACK",
-	        	"contributor": "Max Mock",
-	        	"document": "01110011010100111111111010011111",
-	        	"thumbnailUrl": "thumbnailUrl 1",
-	        	"enableEdit": false,
-	        	"enableDelete": true,
-	        	"visibleDelete": true,
-	        	"visibleEdit": false,
-	        	"url": "url 1",
-	        	"__metadata": {
-	        		"uri": "AttachmentSet(refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId2',phioId='phioId2')",
-	        		"type": "AI_CRM_GW_MYMESSAGE_SRV.Attachment"
-	        	},
-	        	"MessageResultSet": {
-	        		"__deferred": {
-	        			"uri": "AttachmentSet(refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId2',phioId='phioId2')/MessageResultSet"
-	        		}
-	        	}
-
-	        }]);
-		    
-		   
-		    
 		    var fnSuccess = function (oResponse) {
 		        that.oView.attachmentCollection.setBusy(false);
 		        that.oAttachmentSet = oResponse.results;
-		        that.setAttachments(that, that.oAttachmentSet);
+		        //that.setAttachments(that, that.oAttachmentSet);
 		    };
 		    
 		    var fnError = function (oResponse) {
@@ -295,7 +188,7 @@ sap.ui.define([
 		    };
 
 		    oView.attachmentCollection.setBusy(true);
-		    that.setAttachments(that, that.oAttachmentSet.getData());
+//		    that.setAttachments(that, that.oAttachmentSet.getData());
 		    that.oView.attachmentCollection.setBusy(false);
 		    
 		},
@@ -303,7 +196,7 @@ sap.ui.define([
 		setAttachments: function (controller, AttachmentSet) {
 			$.each(AttachmentSet, function (index, value) {
 		        AttachmentSet[index].url = value.url;
-		        AttachmentSet[index].documentId = "refGuid=guid'" + value.refGuid + "',loioId='" + value.loioId + "',phioId='" + value.phioId +"'";
+		        AttachmentSet[index].documentId = "refGuid=guid'" + value.refGUID + "',loioId='" + value.loioId + "',phioId='" + value.phioId +"'";
 		        var oFile = value;
 		        if (this.extHookUploadCollectionItemData) { // check whether any extension has implemented the hook...
 		          this.extHookUploadCollectionItemData(oFile); // ...and call it
@@ -336,13 +229,11 @@ sap.ui.define([
 					sObjectId = oObject.ObjectId,
 					sObjectDescription = oObject.Description,
 					oViewModel = this.getModel("detailView");
-	
-				this.getOwnerComponent().oListSelector.selectAListItem(sPath);
-	
-				oViewModel.setProperty("/shareSendEmailSubject",
-					oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
-				oViewModel.setProperty("/shareSendEmailMessage",
-					oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectDescription, sObjectId, location.href]));
+					this.getOwnerComponent().oListSelector.selectAListItem(sPath);
+					oViewModel.setProperty("/shareSendEmailSubject",
+						oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
+					oViewModel.setProperty("/shareSendEmailMessage",
+						oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectDescription, sObjectId, location.href]));
 			},
 
 		_onMetadataLoaded : function () {
@@ -432,10 +323,21 @@ sap.ui.define([
 				this.byId("actionSheet").openBy(oButton);
 			},
 			
+			onSaveButtonPress: function(oEvent) {
+				var oButton = oEvent.getSource();
+				this.getOwnerComponent().getModel().read("/WorkPackageSet", {
+					success: function (oData, oResponse) {
+						console.log(oData.results.length);
+					},error: function (oError) {
+
+					}})
+			},
+			
 			onPressAccept: function(oEvent) {
 				 MessageToast.show("Accept");
 			},
-		    
+
+			
 		    onUploadComplete: function (oEvent) {
 		        var that = this;
 		        var fnSuccess = function (oResponse) {
@@ -452,7 +354,7 @@ sap.ui.define([
 
 		          $.each(oResponse.results, function (index, value) {
 		            oResponse.results[index].url = value.__metadata.media_src;
-		            oResponse.results[index].documentId = "refGuid=guid'" + value.refGuid + "',loioId='" + value.loioId + "',phioId='" + value.phioId +
+		            oResponse.results[index].documentId = "refGuid=GUID'" + value.refGuid + "',loioId='" + value.loioId + "',phioId='" + value.phioId +
 		              "'";
 
 		            if (hasDocumentId(that.oAttachmentSet, oResponse.results[index].documentId)) {
@@ -495,38 +397,25 @@ sap.ui.define([
 		      
 		      onAddText : function(oEvent){
 		    	  var that = this;
-//		    	  var dialog = new Dialog({
-//						icon: "sap-icon://message-information",
-//						title: "Add New Text",
-//						type: "Message",
-//						beginButton: new Button({
-//							text: "OK",
-//							press: function() {
-//								dialog.close();
-//							}
-//						}),
-//						afterClose: function() {
-//							dialog.destroy();
-//						}
-//					});
-//
-//					dialog.open();
-					
-					
-					if (!this._selectNotificationDialog) {
-						this._selectNotificationDialog = sap.ui.xmlfragment(
-								"zwx.sm.charm.urgentchange.view.NotificationDialog", this);
-						this.getView().addDependent(this._selectNotificationDialog);
-					}
+				if (!this._selectNotificationDialog) {
+					this._selectNotificationDialog = sap.ui.xmlfragment(
+							"zwx.sm.charm.urgentchange.view.NotificationDialog", this);
+					this.getView().addDependent(this._selectNotificationDialog);
+				}
 //					this.getView().setModel(new JSONModel(obj), "NotificationListSet");
-					this._selectNotificationDialog.open();
+				this._selectNotificationDialog.open();
 		      },
 		      
 		      handleNotificationSelect: function(oEvent){
-					this._selectNotificationDialog.close();
-				},
+		    	  var sText = sap.ui.getCore().byId('textAreaWithBinding').getValue(); 
+		    	  console.log(sText);
+		    	  
+		    	  this._selectNotificationDialog.close();
+		    	  sap.ui.getCore().byId('textAreaWithBinding').setValue(""); 
+			  },
 				
 				handleNotificationCancelDialog : function() {
+					this.getView().getModel().resetChanges();
 					this._selectNotificationDialog.close();
 				},
 				
@@ -548,6 +437,39 @@ sap.ui.define([
 					}
 					this._messagePopover.toggle(oMessagesButton);
 				},
+				
+				onSaveButtonTestPress: function(oEvent) {
+					var titleModel = this.getView().getModel("titleInfo");
+					titleModel.setProperty("/Type", "Good");
+//					var oButton = oEvent.getSource();
+//					var oModel = this.getOwnerComponent().getModel();
+//					var result = oModel.getData();
+//					oModel.setHeaders({
+//					    "content-type": "application/json;charset=utf-8"
+//					});
+//					var oEntry = {};
+//					oEntry.ObjectId = "8000019216";
+//					oEntry.Description = "Test Create";
+//					console.log(oEntry);
+//					oModel.update("/WorkPackageSet", oEntry, {
+//						
+//						merge: true,
+//						success: function (oData, oResponse) {
+//							 MessageToast.show("Create successful");
+//						},
+//						error: function (oError) {
+//							MessageToast.show("fail");
+//						}
+//					})
+					
+//					var mParams = {};
+//					  mParams.success = function () {
+//						  MessageToast.show("Create successful");
+//						  console.log("Create successful");
+//					  };
+//
+//					  oModel.submitChanges(mParams);
+				}
 	});
 
 });

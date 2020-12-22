@@ -49,25 +49,25 @@
 								<form:SimpleForm id="detailForm" class="sapUiLargeMarginBegin sapUiLargeMarginBottom"
 									editable="true"
 									layout="ResponsiveGridLayout"
-									labelSpanXL="4"
+									labelSpanXL="-1"
 									labelSpanL="4"
-									labelSpanM="4"
-									labelSpanS="4"
+									labelSpanM="2"
+									labelSpanS="12"
 									adjustLabelSpan="true"
-									emptySpanXL="3"
-									emptySpanL="3"
-									emptySpanM="3"
-									emptySpanS="2"
+									emptySpanXL="-1"
+									emptySpanL="0"
+									emptySpanM="0"
+									emptySpanS="0"
 									columnsXL="-1"
 									columnsL="2"
 									columnsM="2"
 									singleContainerFullSize="true"
 									ariaLabelledBy="Title1">
-									<core:Title text="{i18n>FORM_TITLE_GENERAL_DATA}" />
-									<Label id="toBeTestedDueByLabel" text="{i18n>TO_BE_TESTED_DUE_BY}"/>
+									<core:Title text="{i18n>FORM_TITLE_PARTNER_FUNCTION}" />
+									<Label id="titleLabel" text="{i18n>TITLE}"/>
 									<Input
 										type="Text"
-										value="{ToBeTestedDueBy}" enabled="false" width="150px"/>
+										value="{Description}" enabled="false" width="150px"/>
 									<Label id="CreateByLabel" text="{i18n>CREATED_BY}"/>
 									<Input
 										type="Text"
@@ -77,9 +77,7 @@
 										type="Text"
 										value="{Coordinator}" enabled="false" width="150px"/>
 									<Label id="popLabel" text="{i18n>POP}"/>
-									<Input
-										type="Text"
-										value="{POP}" enabled="false" width="150px"/>
+									<Input type="Text" enabled="false" value="{POP}" width="150px"/>
 									<Label id="solutionArchitectLabel" text="{i18n>SOLUTION_ARCHITECT}"/>
 									<Input
 										type="Text"
@@ -88,6 +86,16 @@
 									<Input
 										type="Text"
 										value="{ServiceTeam}" enabled="false" width="150px"/>
+										
+									<core:Title text="{i18n>FORM_TITLE_INFO}" />
+									<Label id="createDateLabel" text="{i18n>CREATE_DATE}"/>
+									<Input type="Text" value="{path: '/CreatedDate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'short'}}" enabled="false" width="150px"/>
+									
+									
+									
+									<Label id="toBeTestedDueByLabel" text="{i18n>TO_BE_TESTED_DUE_BY}"/>
+									<Input type="Text" value="{ToBeTestedDueBy}" enabled="false" width="150px"/>
+									
 										
 									<core:Title text="{i18n>FORM_TITLE_CATEGORY}" />
 									<Label id="applicationCodeLabel" text="{i18n>APPLICATION_CODE}"/>
@@ -130,6 +138,19 @@
 									<Input
 										type="Text"
 										value="{CyclePhase}" enabled="false" width="150px"/>
+										
+									<core:Title text="{i18n>FORM_TITLE_PROCESSING_DATA}" />
+									<Label id="statusLabel" text="{i18n>STATUS}"/>
+									<Input type="Text" value="{Status}" enabled="false" width="150px"/>
+									<Label id="priorityLabel" text="{i18n>PRIORITY}"/>
+									<Input type="Text" value="{Priority}" enabled="false" width="150px"/>
+									<Label id="demonstrationStatusLabel" text="{i18n>DEMONSTRATION_STATUS}"/>
+									<Input type="Text" value="{DemonstrationStatus}" enabled="false" width="150px"/>
+									<Label id="programChangeLabel" text="{i18n>PROGRAM_CHANGE}"/>
+									<Input type="Text" value="{ProgramChange}" enabled="false" width="150px"/>
+									<Label id="authorizationChangeLabel" text="{i18n>AUTHORIZATION_CHANGE}"/>
+									<Input type="Text" value="{AuthorizationChange}" enabled="false" width="150px"/>
+									
 								</form:SimpleForm>
 							</core:ExtensionPoint >
 						</ScrollContainer>
@@ -137,23 +158,22 @@
 					
 					<IconTabFilter icon="sap-icon://post" iconColor="Neutral" id="textFilter" text="{i18n>ICON_TAB_Texts}">
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
-							<List id="textList" items="{/TextsSet}" > 
+							<List id="textList" items="{path: 'TextSet'}" > 
 								<headerToolbar>
 									<OverflowToolbar>
 										<ToolbarSpacer/>
-										<Button
-											id="addButton"
-											press=".onAddText"
-											icon="sap-icon://add"
-											type="Transparent"/>
+<!-- 										<Button -->
+<!-- 											id="addButton" -->
+<!-- 											press=".onAddText" -->
+<!-- 											icon="sap-icon://add" -->
+<!-- 											type="Transparent"/> -->
 									</OverflowToolbar>
 								</headerToolbar>
 								<items>
-									<ObjectListItem type="Navigation" title="{name}" >
+									<ObjectListItem type="Navigation" title="{TdName}" >
 										<attributes>
-<!-- 											<ObjectAttribute text="{name}" /> -->
-											<ObjectAttribute text="{status}" />
-											<ObjectAttribute text="{description}" />
+											<ObjectAttribute text="{TextString}" />
+											<ObjectAttribute text="{TdidTxt}{DateTimeText}" />
 										</attributes>
 									</ObjectListItem>
 								</items>
@@ -168,7 +188,7 @@
 						text="{i18n>ICON_TAB_ATTACHMENTS}">
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
 							<UploadCollection noDataText="{i18n>ATTACHMENT_NO_DATA_TEXT}" change="onChange" fileDeleted="onDeleteFile" fileRenamed="onFileRenamed"
-								id="fileupload" multiple="false" uploadComplete="onUploadComplete" busyIndicatorDelay="0" items="{/AttachmentSet}">
+								id="fileupload" uploadEnabled="false" uploadButtonInvisible="false" instantUpload="false" multiple="false" uploadComplete="onUploadComplete" busyIndicatorDelay="0" items="{/AttachmentSet}">
 								<items>
 									<UploadCollectionItem documentId="{documentId}" mimeType="{mimeType}" fileName="{fileName}" enableDelete="{enableDelete}"
 										enableEdit="false" visibleEdit="false" visibleDelete="false" url="{url}">
@@ -185,15 +205,15 @@
 			
 					<IconTabFilter id="scopeFilter" icon="sap-icon://endoscopy" iconColor="Positive" text="{i18n>ICON_TAB_SCOPE}">
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
-							<Table id="scopeTable" inset="false" items="{path: '/ScopeSet'}">
+							<Table id="scopeTable" inset="false" items="{path: 'ScopeSet'}">
 								<columns>
 									<Column width="5rem">
 										<Text text="{i18n>SCOPE_TYPE}" />
 									</Column>
-									<Column >
+									<Column width="5rem">
 										<Text text="{i18n>SCOPE_TABLE_TITLE}" />
 									</Column>
-									<Column width="5rem"> 
+									<Column > 
 										<Text text="{i18n>SCOPE_PRODUCTIVE_SYSTEM}" />
 									</Column>
 									<Column>
@@ -204,9 +224,9 @@
 									<ColumnListItem>
 										<cells>
 											<ObjectIdentifier text="{Type}"/>
-											<Text text="{title}" />
-											<Text text="{productiveSystem}" />
-											<Text text="{status}" />
+											<Text text="{Description}" />
+											<Text text="{ProductiveSystem}" />
+											<Text text="{Status}" />
 										</cells>
 									</ColumnListItem>
 								</items>
@@ -216,40 +236,39 @@
 					
 					<IconTabFilter icon="sap-icon://calendar" iconColor="Neutral" id="dateFilter" text="{i18n>ICON_TAB_EFFORT}">
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
-								<Table id="effertTable" inset="false"
+								<Table id="EFFORTTable" inset="false"
 									items="{
-										path: '/EffertSet'
+										path: 'EffortSet'
 										
 									}">
 									<columns>
 										<Column width="5rem">
-											<Text text="{i18n>EFFERT_ID}" />
+											<Text text="{i18n>EFFORT_ID}" />
 										</Column>
 <!-- 										<Column > -->
 <!-- 											<Text text="Actions" /> -->
 <!-- 										</Column> -->
 										<Column width="5rem"> 
-											<Text text="{i18n>EFFERT_TYPE}" />
+											<Text text="{i18n>EFFORT_TYPE}" />
 										</Column>
 										<Column>
-											<Text text="{i18n>EFFERT_FUNCTION}" />
+											<Text text="{i18n>EFFORT_FUNCTION}" />
 										</Column>
 										<Column  minScreenWidth="Tablet" demandPopin="true">
-											<Text text="{i18n>EFFERT_DESCRIPTION}" />
+											<Text text="{i18n>EFFORT_DESCRIPTION}" />
 										</Column>
 										<Column  minScreenWidth="Tablet" demandPopin="true">
-											<Text text="{i18n>EFFERT_WORKUNIT}" />
+											<Text text="{i18n>EFFORT_WORKUNIT}" />
 										</Column>
 									</columns>
 									<items>
 										<ColumnListItem>
 											<cells>
-												<ObjectIdentifier text="{Id}"/>
-<!-- 												<Text text="{Actions}" /> -->
+												<ObjectIdentifier text="{Index}"/>
 												<Text text="{ActivityType}" />
 												<Text text="{Function}" />
 												<Text text="{Description}" />
-												<Text text="{WorkUnit}" />
+												<Text text="{Work}{Unit}" />
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -292,16 +311,22 @@
 		</semantic:messagesIndicator>
 		
 		<semantic:footerCustomActions>
-			<Button
-				text="{i18n>ACTION_BUTTON}"
-				class="sapUiSmallMargin"
-				press=".onButtonPress">
-				<dependents>
-					<core:Fragment
-						fragmentName="zwx.sm.charm.urgentchange.view.ActionSheet"
-						type="XML" />
-				</dependents>
-			</Button>
+<!-- 			<Button -->
+<!-- 				text="{i18n>ACTION_BUTTON}" -->
+<!-- 				class="sapUiSmallMargin" -->
+<!-- 				press=".onButtonPress"> -->
+<!-- 				<dependents> -->
+<!-- 					<core:Fragment -->
+<!-- 						fragmentName="zwx.sm.charm.urgentchange.view.ActionSheet" -->
+<!-- 						type="XML" /> -->
+<!-- 				</dependents> -->
+<!-- 			</Button> -->
+<!-- 			<Button -->
+<!-- 				text="Save" -->
+<!-- 				enabled="{= ${POP}.length !== 0 }" -->
+<!-- 				class="sapUiSmallMargin" -->
+<!-- 				press=".onSaveButtonTestPress"> -->
+<!-- 			</Button> -->
 		</semantic:footerCustomActions>
 	</semantic:SemanticPage>
 

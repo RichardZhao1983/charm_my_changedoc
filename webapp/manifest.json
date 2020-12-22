@@ -12,7 +12,7 @@
 		"resources": "resources.json",
 		"dataSources": {
 			"mainService": {
-				"uri": "/myChangedoc/proxy/sap/opu/odata/sap/zwanhua_test_srv/",
+				"uri": "/sap/opu/odata/sap/Z_charm_fiori_odata_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -69,6 +69,14 @@
 			},
 			"": {
 				"dataSource": "mainService",
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Request",
+					"RefreshAfterChange" : true,
+					"headers":{"appName":"myWorkList"}
+				},
 				"preload": true
 			}
 		},
@@ -99,7 +107,7 @@
 					"target": "master"
 				},
 				{
-					"pattern": "WorkPackageSet/{objectId}",
+					"pattern": "WorkPackageSet/{guid}",
 					"name": "object",
 					"target": [
 						"master",

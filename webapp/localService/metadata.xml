@@ -1,133 +1,257 @@
-<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
-<edmx:DataServices m:DataServiceVersion="2.0">
-<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZWANHUA_TEST_SRV" xml:lang="en" sap:schema-version="1">
-	<EntityType Name="UrgentChangeDoc" sap:content-version="1">
-		<Key>
-			<PropertyRef Name="ObjectId"/>
-		</Key>
-		<Property Name="Tester" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Tester" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="ChangeManager" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ChangeManager" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="Basis" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Basis" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="Developer" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Developer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="Guid" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="GUID 16" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="ObjectId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="ProcessType" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="PostingDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Posting Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="LogicalSystem" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Logical System" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="ObjectType" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Object Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="CreatedAt" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Created On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="Created By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="ChangedAt" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Changed On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<Property Name="ChangedBy" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="Changed By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		<NavigationProperty Name="TaskList" Relationship="ZWANHUA_TEST_SRV.TaskList" FromRole="FromRole_TaskList" ToRole="ToRole_TaskList"/>
-		</EntityType>
-
-		<EntityType Name="ScopeItem" sap:content-version="1">
-			<Key>
-				<PropertyRef Name="ObjectId"/>
-			</Key>
-			<Property Name="ObjectId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Type" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="title" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Title" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="productiveSystem" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Productive System" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="status" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		</EntityType>
-		
-		<EntityType Name="EffertItem" sap:content-version="1">
-			<Key>
-				<PropertyRef Name="Id"/>
-			</Key>
-			<Property Name="Id" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Description" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="ActivityType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ActivityType" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Actions" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Actions" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Function" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Function" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="WorkUnit" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="WorkUnit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		</EntityType>
-		
-		<EntityType Name="WorkPackageItem" sap:content-version="1">
-			<Key>
-				<PropertyRef Name="ObjectId"/>
-			</Key>
-			<Property Name="ObjectId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Description" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Type" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Priority" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Priority" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Status" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="CreatedBy" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Created By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Coordinator" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Coordinator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="POP" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="POP" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="SolutionArchitect" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="SolutionArchitect" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="ServiceTeam" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ServiceTeam" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="ToBeTestedDueBy" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ToBeTestedDueBy" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="CycleID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CycleID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="CycleDescription" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CycleDescription" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="CyclePhase" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CyclePhase" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="ApplicationCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ApplicationCode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="FunctionCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="FunctionCode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="CRType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CRType" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="CountryCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CountryCode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CompanyCode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Division" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		</EntityType>
-		
-		<EntityType Name="TaskListItem" sap:content-version="1">
-			<Key>
-				<PropertyRef Name="Tasklist"/>
-				<PropertyRef Name="TrorderNumber"/>
-				<PropertyRef Name="SysName"/>
-				<PropertyRef Name="SysType"/>
-				<PropertyRef Name="SysClient"/>
-			</Key>
-			<Property Name="CreatedDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Created On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Tasklist" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Task List" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="CreatedTime" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Creation Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="TrorderNumber" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Request/Task" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="ReleasedDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Release Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="SysName" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Ext. System ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="ReleasedTime" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Release Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="SysType" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="TS Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="SysClient" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="CtsId" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="CTS ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="TransportTrack" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Transport Track" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="RespUser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Trfunction" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Export Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="TrorderCopy" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Request/Task" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Target" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Transport Target" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="SmiProject" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cycle" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Originator" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Creator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="OriginatorId" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="ID of Creator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="OriginatorKey" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Change Process" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-			<Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Short Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-		</EntityType>
-		<Association Name="TaskList" sap:content-version="1">
-		<End Type="ZWANHUA_TEST_SRV.UrgentChangeDoc" Multiplicity="1" Role="FromRole_TaskList"/>
-		<End Type="ZWANHUA_TEST_SRV.TaskListItem" Multiplicity="*" Role="ToRole_TaskList"/>
-		<ReferentialConstraint>
-		<Principal Role="FromRole_TaskList">
-		<PropertyRef Name="ObjectId"/>
-		</Principal>
-		<Dependent Role="ToRole_TaskList">
-		<PropertyRef Name="OriginatorKey"/>
-		</Dependent>
-		</ReferentialConstraint>
-		</Association>
-	<EntityContainer Name="ZWANHUA_TEST_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
-		<EntitySet Name="UrgentChangeDocSet" EntityType="ZWANHUA_TEST_SRV.UrgentChangeDoc" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-		<EntitySet Name="TaskListItemSet" EntityType="ZWANHUA_TEST_SRV.TaskListItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-		<EntitySet Name="ScopeSet" EntityType="ZWANHUA_TEST_SRV.ScopeItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-		<EntitySet Name="EffertSet" EntityType="ZWANHUA_TEST_SRV.EffertItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-		<EntitySet Name="WorkPackageSet" EntityType="ZWANHUA_TEST_SRV.WorkPackageItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-		<AssociationSet Name="TaskListSet" Association="ZWANHUA_TEST_SRV.TaskList" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-			<End EntitySet="UrgentChangeDocSet" Role="FromRole_TaskList"/>
-			<End EntitySet="TaskListItemSet" Role="ToRole_TaskList"/>
-		</AssociationSet>
-	</EntityContainer>
-<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="http://mo-053fd00eb.mo.sap.corp:50000/sap/opu/odata/sap/zwanhua_test_srv/$metadata"/>
-<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="http://mo-053fd00eb.mo.sap.corp:50000/sap/opu/odata/sap/zwanhua_test_srv/$metadata"/>
-</Schema>
-</edmx:DataServices>
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="Z_CHARM_FIORI_ODATA_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="WorkPackage" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="GUID"/>
+                </Key>
+                <Property Name="ObjectId" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ObjectId" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatusID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="StatusID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PriorityID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="PriorityID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Priority" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Priority" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedByBP" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CreatedByBP" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CreatedBy" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CoordinatorBP" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CoordinatorBP" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Coordinator" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Coordinator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="POPBP" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="POPBP" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="POP" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="POP" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SolutionArchitectBP" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="SolutionArchitectBP" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SolutionArchitect" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="SolutionArchitect" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ServiceTeamBP" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ServiceTeamBP" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ServiceTeam" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ServiceTeam" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ToBeTestedDueBy" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ToBeTestedDueBy" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CycleID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CycleID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CycleDescription" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CycleDescription" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CyclePhaseID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CyclePhaseID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CyclePhase" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CyclePhase" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ApplicationCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ApplicationCode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FunctionCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="FunctionCode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CRTypeID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CRTypeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CRType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CRType" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CompanyCode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Division" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="CreatedDate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GUID" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="GUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AuthorizationChangeID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="AuthorizationChangeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AuthorizationChange" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="AuthorizationChange" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProgramChangeID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ProgramChangeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProgramChange" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ProgramChange" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DemoDesc" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="DemoDesc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DemonstrationStatusID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="DemonstrationStatusID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DemonstrationStatus" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="DemonstrationStatus" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CountryCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CountryCode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ActionSet" Relationship="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Action" FromRole="FromRole_WorkPackage_Action" ToRole="ToRole_WorkPackage_Action"/>
+                <NavigationProperty Name="AttachmentSet" Relationship="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Attachment" FromRole="FromRole_WorkPackage_Attachment" ToRole="ToRole_WorkPackage_Attachment"/>
+                <NavigationProperty Name="ScopeSet" Relationship="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Scope" FromRole="FromRole_WorkPackage_Scope" ToRole="ToRole_WorkPackage_Scope"/>
+                <NavigationProperty Name="EffortSet" Relationship="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Effort" FromRole="FromRole_WorkPackage_Effort" ToRole="ToRole_WorkPackage_Effort"/>
+                <NavigationProperty Name="TextSet" Relationship="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Text" FromRole="FromRole_WorkPackage_Text" ToRole="ToRole_WorkPackage_Text"/>
+            </EntityType>
+            <EntityType Name="Attachment" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="docGUID"/>
+                    <PropertyRef Name="loioId"/>
+                    <PropertyRef Name="phioId"/>
+                </Key>
+                <Property Name="docGUID" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="docGUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="refGUID" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Guid" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="loioId" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Object ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="phioId" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Object ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="documentId" Type="Edm.String" Nullable="false" MaxLength="132" sap:unicode="false" sap:label="DOCUMENT_ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="fileName" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Component name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="fileSize" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Size/dim." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="mimeType" Type="Edm.String" Nullable="false" MaxLength="128" sap:unicode="false" sap:label="MIME type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="language" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Language" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="uploadDateFormatted" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Upload Date (formatted)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="uploadDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Time Stamp" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="userName" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="contributor" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="User Name (full)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="document" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="DOCUMENT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="thumbnailUrl" Type="Edm.String" Nullable="false" MaxLength="4096" sap:unicode="false" sap:label="Thumbnail Url" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="enableEdit" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Enable Edit Switch" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="enableDelete" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Enable Delete Switch" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="visibleDelete" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Visible Delete Switch" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="visibleEdit" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Visible Edit Switch" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="url" Type="Edm.String" Nullable="false" MaxLength="4096" sap:unicode="false" sap:label="URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="WorkPackage" Relationship="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Attachment" FromRole="ToRole_WorkPackage_Attachment" ToRole="FromRole_WorkPackage_Attachment"/>
+            </EntityType>
+            <EntityType Name="Effort" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="refGUID"/>
+                    <PropertyRef Name="Index"/>
+                </Key>
+                <Property Name="refGUID" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="refGUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Index" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Index" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotalCost" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="TotalCost" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HourlyRate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="HourlyRate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Unit" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CostType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CostType" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Function" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Function" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ActivityType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ActivityType" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CreatedBy" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Work" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Work" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="WorkPackage" Relationship="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Effort" FromRole="ToRole_WorkPackage_Effort" ToRole="FromRole_WorkPackage_Effort"/>
+            </EntityType>
+            <EntityType Name="Scope" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="refGUID"/>
+                    <PropertyRef Name="Index"/>
+                </Key>
+                <Property Name="refGUID" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="refGUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ObjectID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ObjectID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TypeID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="TypeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProductiveSystem" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ProductiveSystem" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Index" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Index" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="WorkPackage" Relationship="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Scope" FromRole="ToRole_WorkPackage_Scope" ToRole="FromRole_WorkPackage_Scope"/>
+            </EntityType>
+            <EntityType Name="Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="refGUID"/>
+                    <PropertyRef Name="TdName"/>
+                    <PropertyRef Name="Tdobject"/>
+                    <PropertyRef Name="Tdid"/>
+                </Key>
+                <Property Name="refGUID" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="refGUID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DateTimeText" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="DateTimeText" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tdspras" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Tdspras" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TdName" Type="Edm.String" Nullable="false" MaxLength="70" sap:unicode="false" sap:label="TdName" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tdobject" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Tdobject" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tdid" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Tdid" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TextString" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="TextString" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TdidTxt" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="TdidTxt" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TdfuserText" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="TdfuserText" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TextMode" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="TextMode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Email" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Email" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Emailsubject" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Emailsubject" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Department" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Company" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CompanyAddress" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="CompanyAddress" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Contactmobile" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Contactmobile" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Contactphone" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Contactphone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="WorkPackage" Relationship="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Text" FromRole="ToRole_WorkPackage_Text" ToRole="FromRole_WorkPackage_Text"/>
+            </EntityType>
+            <EntityType Name="Action" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="refGUID"/>
+                    <PropertyRef Name="ActionID"/>
+                </Key>
+                <Property Name="AcionGUID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ActionGUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="refGUID" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="refGUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ActionID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ActionID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ActionName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ActionName" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="WorkPackage" Relationship="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Action" FromRole="ToRole_WorkPackage_Action" ToRole="FromRole_WorkPackage_Action"/>
+            </EntityType>
+            <ComplexType Name="BAPIRET">
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Message type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Message Class" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Number" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Message number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV1" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV2" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV3" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV4" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <Association Name="WorkPackage_Attachment" sap:content-version="1">
+                <End Type="Z_CHARM_FIORI_ODATA_SRV.WorkPackage" Multiplicity="*" Role="FromRole_WorkPackage_Attachment"/>
+                <End Type="Z_CHARM_FIORI_ODATA_SRV.Attachment" Multiplicity="*" Role="ToRole_WorkPackage_Attachment"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_WorkPackage_Attachment">
+                        <PropertyRef Name="GUID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_WorkPackage_Attachment">
+                        <PropertyRef Name="docGUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="WorkPackage_Scope" sap:content-version="1">
+                <End Type="Z_CHARM_FIORI_ODATA_SRV.WorkPackage" Multiplicity="*" Role="FromRole_WorkPackage_Scope"/>
+                <End Type="Z_CHARM_FIORI_ODATA_SRV.Scope" Multiplicity="*" Role="ToRole_WorkPackage_Scope"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_WorkPackage_Scope">
+                        <PropertyRef Name="GUID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_WorkPackage_Scope">
+                        <PropertyRef Name="refGUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="WorkPackage_Effort" sap:content-version="1">
+                <End Type="Z_CHARM_FIORI_ODATA_SRV.WorkPackage" Multiplicity="*" Role="FromRole_WorkPackage_Effort"/>
+                <End Type="Z_CHARM_FIORI_ODATA_SRV.Effort" Multiplicity="*" Role="ToRole_WorkPackage_Effort"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_WorkPackage_Effort">
+                        <PropertyRef Name="GUID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_WorkPackage_Effort">
+                        <PropertyRef Name="refGUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="WorkPackage_Text" sap:content-version="1">
+                <End Type="Z_CHARM_FIORI_ODATA_SRV.WorkPackage" Multiplicity="*" Role="FromRole_WorkPackage_Text"/>
+                <End Type="Z_CHARM_FIORI_ODATA_SRV.Text" Multiplicity="*" Role="ToRole_WorkPackage_Text"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_WorkPackage_Text">
+                        <PropertyRef Name="GUID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_WorkPackage_Text">
+                        <PropertyRef Name="refGUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="WorkPackage_Action" sap:content-version="1">
+                <End Type="Z_CHARM_FIORI_ODATA_SRV.WorkPackage" Multiplicity="*" Role="FromRole_WorkPackage_Action"/>
+                <End Type="Z_CHARM_FIORI_ODATA_SRV.Action" Multiplicity="*" Role="ToRole_WorkPackage_Action"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_WorkPackage_Action">
+                        <PropertyRef Name="GUID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_WorkPackage_Action">
+                        <PropertyRef Name="refGUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="Z_CHARM_FIORI_ODATA_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="WorkPackageSet" EntityType="Z_CHARM_FIORI_ODATA_SRV.WorkPackage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="AttachmentSet" EntityType="Z_CHARM_FIORI_ODATA_SRV.Attachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="EffortSet" EntityType="Z_CHARM_FIORI_ODATA_SRV.Effort" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ScopeSet" EntityType="Z_CHARM_FIORI_ODATA_SRV.Scope" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="TextSet" EntityType="Z_CHARM_FIORI_ODATA_SRV.Text" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ActionSet" EntityType="Z_CHARM_FIORI_ODATA_SRV.Action" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="WorkPackage_TextSet" Association="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Text" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="WorkPackageSet" Role="FromRole_WorkPackage_Text"/>
+                    <End EntitySet="TextSet" Role="ToRole_WorkPackage_Text"/>
+                </AssociationSet>
+                <AssociationSet Name="WorkPackage_EffortSet" Association="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Effort" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="WorkPackageSet" Role="FromRole_WorkPackage_Effort"/>
+                    <End EntitySet="EffortSet" Role="ToRole_WorkPackage_Effort"/>
+                </AssociationSet>
+                <AssociationSet Name="WorkPackage_ActionSet" Association="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Action" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="WorkPackageSet" Role="FromRole_WorkPackage_Action"/>
+                    <End EntitySet="ActionSet" Role="ToRole_WorkPackage_Action"/>
+                </AssociationSet>
+                <AssociationSet Name="WorkPackage_ScopeSet" Association="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Scope" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="WorkPackageSet" Role="FromRole_WorkPackage_Scope"/>
+                    <End EntitySet="ScopeSet" Role="ToRole_WorkPackage_Scope"/>
+                </AssociationSet>
+                <AssociationSet Name="WorkPackage_AttachmentSet" Association="Z_CHARM_FIORI_ODATA_SRV.WorkPackage_Attachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="WorkPackageSet" Role="FromRole_WorkPackage_Attachment"/>
+                    <End EntitySet="AttachmentSet" Role="ToRole_WorkPackage_Attachment"/>
+                </AssociationSet>
+                <FunctionImport Name="nextStatus" ReturnType="Z_CHARM_FIORI_ODATA_SRV.BAPIRET" m:HttpMethod="GET">
+                    <Parameter Name="comment" Type="Edm.String" Mode="In"/>
+                    <Parameter Name="ActionGUID" Type="Edm.String" Mode="In"/>
+                    <Parameter Name="GUID" Type="Edm.Guid" Mode="In"/>
+                </FunctionImport>
+            </EntityContainer>
+            <atom:link rel="self" href="https://saphasg4.siemens.com.sg:8200/sap/opu/odata/sap/Z_charm_fiori_odata_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://saphasg4.siemens.com.sg:8200/sap/opu/odata/sap/Z_charm_fiori_odata_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
 </edmx:Edmx>

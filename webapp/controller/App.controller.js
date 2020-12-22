@@ -24,6 +24,7 @@ sap.ui.define([
 				}
 			});
 			this.setModel(oViewModel, "appView");
+			this.getUserInfo();
 
 			fnSetAppNotBusy = function() {
 				oViewModel.setProperty("/busy", false);
@@ -36,6 +37,24 @@ sap.ui.define([
 			// apply content density mode to root view
 			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
 
+		},
+		
+		getUserInfo : function(){
+			var userInfoModel = new JSONModel();
+			this.getOwnerComponent().setModel(userInfoModel, "userInfo");
+			userInfoModel.loadData("/sap/bc/ui2/start_up?depth=0");
+			userInfoModel.attachRequestCompleted(function onCompleted(oEvent) {
+				if (oEvent.getParameter("success")) {
+					this.setData({"json" : this.getJSON(), "status": "Success"}, true);
+				} else {
+					var msg = oEvent.getParameter("errorObject").textStatus;
+					if (msg) {
+						this.setData("status", msg);
+					} else {
+						this.setData("status", "Unknown error retrieving user info");
+					}
+			    }
+			});
 		}
 	});
 });

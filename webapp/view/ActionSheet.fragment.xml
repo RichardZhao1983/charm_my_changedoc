@@ -5,16 +5,4 @@
 	title="Choose Your Action"
 	showCancelButton="true"
 	placement="Top">
-	<Button
-		text="To Be Developed"
-		press=".onPressAccept" />
-	<Button
-		text="Set to Scoping"
-		press="MessageToast.show('Selected action is ' + ${$source>/text})" />
-	<Button
-		text="Reject"
-		press="MessageToast.show('Selected action is ' + ${$source>/text})" />
-	<Button
-		text="On Hold"
-		press="MessageToast.show('Selected action is ' + ${$source>/text})" />
 </ActionSheet>

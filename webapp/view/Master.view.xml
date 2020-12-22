@@ -2,11 +2,13 @@
 	controllerName="zwx.sm.charm.urgentchange.controller.Master"
 	xmlns="sap.m"
 	xmlns:semantic="sap.f.semantic"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 	xmlns:mvc="sap.ui.core.mvc">
 
 	<semantic:SemanticPage
 		id="masterPage"
 		preserveHeaderStateOnScroll="true"
+		showFooter="true"
 		toggleHeaderOnTitleClick="false">
 		<semantic:titleHeading>
 			<Title
@@ -16,13 +18,14 @@
 		</semantic:titleHeading>
 		<semantic:content>
 			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
-			
+			<PullToRefresh id="pullToRefresh" visible="{device>/support/touch}" refresh="onRefresh"/>
 			<List
 				id="list"
 				width="auto"
 				class="sapFDynamicPageAlignContent"
 				items="{
 					path : '/WorkPackageSet',
+					parameters:{expand : 'AttachmentSet,ScopeSet,EffortSet,TextSet'},
 					sorter: {
 						path: 'ObjectId',
 						descending: true
@@ -34,6 +37,7 @@
 				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
 				growing="true"
 				growingScrollToLoad="true"
+				growingThreshold="10"
 				updateFinished=".onUpdateFinished"
 				selectionChange=".onSelectionChange">
 				<headerToolbar>
@@ -53,12 +57,11 @@
 							</layoutData>
 						</SearchField>
 						<ToolbarSpacer/>
-						<Button
-							id="sortButton"
-							press=".onOpenViewSettings"
-							icon="sap-icon://sort"
-							type="Transparent"/>
+						<Label text="Create Date: " labelFor="DRS3" width="100px"/>
+						<DateRangeSelection id="createDateRange" showFooter="true"  width="220px"/>
+						<Button icon="sap-icon://search" class="sapUiSmallMargin" press=".onCreateDateSearchButtonPress"/>
 					</OverflowToolbar>
+					
 				</headerToolbar>
 				<items>
 					<ObjectListItem
@@ -77,5 +80,12 @@
 				</items>
 			</List>
 		</semantic:content>
+		<semantic:footerCustomActions>
+			<Button
+				icon="sap-icon://filter"
+				class="sapUiSmallMargin"
+				press=".onFilterButtonPress">
+			</Button>
+		</semantic:footerCustomActions>
 	</semantic:SemanticPage>
 </mvc:View>

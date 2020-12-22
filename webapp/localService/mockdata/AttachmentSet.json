@@ -1,0 +1,64 @@
+[{
+		"refGUID": "dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7",
+		"loioId": "loioId1",
+		"phioId": "phioId1",
+		"documentId": "refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId1',phioId='phioId1'",
+		"fileName": "Problem_Desription.docx",
+		"fileSize": "000000101276",
+		"mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+		"language": "E",
+		"uploadDateFormatted": "uploadDateFormatted 1",
+		"uploadDate": "/Date(1444035581000)/",
+		"userName": "JACK",
+		"contributor": "Max Mock",
+		"document": "01110011010100111111111010011111",
+		"thumbnailUrl": "thumbnailUrl 1",
+		"enableEdit": false,
+		"enableDelete": true,
+		"visibleDelete": true,
+		"visibleEdit": false,
+		"url": "https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Ftimgsa.baidu.com%2Ftimg%3Fimage%26quality%3D80%26size%3Db9999_10000%26sec%3D1594702511956%26di%3D5909118d3c6e80009869550a0f6f38f8%26imgtype%3D0%26src%3Dhttp%253A%252F%252F211.159.149.56%253A8080%252Fmap%252F16%252F4o28b0625501ad13015501ad2bfc0093.jpg&thumburl=https%3A%2F%2Fss0.baidu.com%2F-Po3dSag_xI4khGko9WTAnF6hhy%2Fimage%2Fw%253D500%2Fsign%3D2a367cecc7177f3e1034fc0d40ce3bb9%2Fd50735fae6cd7b8965afd4d9012442a7d8330ead.jpg",
+	    "__metadata": {
+			"uri": "AttachmentSet(refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId1',phioId='phioId1')",
+			"type": "AI_CRM_GW_MYMESSAGE_SRV.Attachment"
+		},
+		"MessageResultSet": {
+			"__deferred": {
+				"uri": "AttachmentSet(refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId1',phioId='phioId1')/MessageResultSet"
+			}
+		}
+	
+	},
+
+    {
+    	"refGUID": "dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7",
+    	"loioId": "loioId2",
+    	"phioId": "phioId2",
+    	"documentId": "refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId2',phioId='phioId2'",
+    	"fileName": "Screenshot.jpg",
+    	"fileSize": "000000192276",
+    	"mimeType": "image/jpeg",
+    	"language": "E",
+    	"uploadDateFormatted": "uploadDateFormatted 1",
+    	"uploadDate": "/Date(1487945581000)/",
+    	"userName": "JACK",
+    	"contributor": "Max Mock",
+    	"document": "01110011010100111111111010011111",
+    	"thumbnailUrl": "thumbnailUrl 1",
+    	"enableEdit": false,
+    	"enableDelete": true,
+    	"visibleDelete": true,
+    	"visibleEdit": false,
+    	"url": "https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Ftimgsa.baidu.com%2Ftimg%3Fimage%26quality%3D80%26size%3Db9999_10000%26sec%3D1594702511956%26di%3D5909118d3c6e80009869550a0f6f38f8%26imgtype%3D0%26src%3Dhttp%253A%252F%252F211.159.149.56%253A8080%252Fmap%252F16%252F4o28b0625501ad13015501ad2bfc0093.jpg&thumburl=https%3A%2F%2Fss0.baidu.com%2F-Po3dSag_xI4khGko9WTAnF6hhy%2Fimage%2Fw%253D500%2Fsign%3D2a367cecc7177f3e1034fc0d40ce3bb9%2Fd50735fae6cd7b8965afd4d9012442a7d8330ead.jpg",
+	     "__metadata": {
+    		"uri": "AttachmentSet(refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId2',phioId='phioId2')",
+    		"type": "AI_CRM_GW_MYMESSAGE_SRV.Attachment"
+    	},
+    	"MessageResultSet": {
+    		"__deferred": {
+    			"uri": "AttachmentSet(refGuid=guid'dc7dd06b-7f09-4582-86b8-fb4ee0b2c5b7',loioId='loioId2',phioId='phioId2')/MessageResultSet"
+    		}
+    	}
+
+    }
+]

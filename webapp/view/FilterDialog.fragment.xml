@@ -1,0 +1,27 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		title="Filter Settings"
+		sortDescending="true"
+		groupDescending="true"
+		confirm="handleConfirm">
+		<filterItems>
+			<ViewSettingsFilterItem text="Assigned to" key="1">
+				<items>
+					<ViewSettingsItem text="Created by me" key="1a" selected="{filterView>/CreatedBy}" />
+					<ViewSettingsItem text="Assigned SA is me" key="1b" selected="{filterView>/SolutionArchitect}"/>
+					<ViewSettingsItem text="Assigned POP is me" key="1c" selected="{filterView>/POP}"/>
+					<ViewSettingsItem text="Assigned Coordinator is me" key="1d" selected="{filterView>/Coordinator}"/>
+				</items>
+			</ViewSettingsFilterItem>
+		</filterItems>
+<!-- 		<customTabs> -->
+<!-- 			<ViewSettingsCustomTab id="example-settings" icon="sap-icon://add-filter"> -->
+<!-- 				<content> -->
+<!-- 					<Button text="simple button example" /> -->
+<!-- 				</content> -->
+<!-- 			</ViewSettingsCustomTab> -->
+<!-- 		</customTabs> -->
+	</ViewSettingsDialog>
+</core:FragmentDefinition>
