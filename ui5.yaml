@@ -1,0 +1,4 @@
+specVersion: '2.2'
+metadata:
+  name: charm_my_changedoc
+type: application
