@@ -25,7 +25,11 @@
 				class="sapFDynamicPageAlignContent"
 				items="{
 					path : '/WorkPackageSet',
-					parameters:{expand : 'AttachmentSet,ScopeSet,EffortSet,TextSet'},
+					filters: [ {path: 'CreatedBy', operator: 'EQ', value1: 'currectUser'},
+							   {path: 'SolutionArchitect', operator: 'EQ', value1: 'currectUser'},
+						       {path: 'POP', operator: 'EQ', value1: 'currectUser'},
+							   {path: 'Coordinator', operator: 'EQ', value1: 'currectUser'}
+							 ],
 					sorter: {
 						path: 'ObjectId',
 						descending: true

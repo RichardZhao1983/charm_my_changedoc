@@ -45,16 +45,10 @@ sap.ui.define([
 		/* =========================================================== */
 
 		_onObjectMatched : function (oEvent) {
-			var sObjectId =  oEvent.getParameter("arguments").objectId;
 			var sGUID =  oEvent.getParameter("arguments").guid;
-			
-			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
-
+			var sObjectPath = "WorkPackageSet(guid'" + sGUID + "')";
+			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");	
 			this.getModel().metadataLoaded().then( function() {
-				var sObjectPath = this.getModel().createKey("WorkPackageSet", {
-					ObjectId :  sObjectId,
-					GUID : sGUID
-				});
 				this._bindView("/" + sObjectPath);
 			}.bind(this));
 		},
@@ -88,17 +82,6 @@ sap.ui.define([
 			);
 		},
 
-
-
-		
-
-		/**
-		 * Binds the view to the object path. Makes sure that detail view displays
-		 * a busy indicator while data for the corresponding element binding is loaded.
-		 * @function
-		 * @param {string} sObjectPath path to the object to be bound to the view.
-		 * @private
-		 */
 		_bindView : function (sObjectPath) {
 			// Set busy indicator during view binding
 			var oViewModel = this.getModel("detailView");
@@ -107,12 +90,16 @@ sap.ui.define([
 			oView.taskListItemPath = "/TaskListItemSet";
 			oView.attachmentPath = sObjectPath + "/AttachmentSet";
 		    oView.textcountPath = sObjectPath + "/$count";
-		    oView.attachmentcountPath = sObjectPath + "/$count";
+			oView.attachmentcountPath = sObjectPath + "/$count";
+			oView.textSetPath = sObjectPath + "/TextSet";
 
 			// If the view was not bound yet its not busy, only if the binding requests data it is set to busy again
 			oViewModel.setProperty("/busy", false);
 			this.getView().bindElement({
 				path : sObjectPath,
+				parameters: {
+					expand : 'AttachmentSet,ScopeSet,EffortSet,TextSet'
+				},
 				events: {
 					change : this._onBindingChange.bind(this),
 					dataRequested : function () {

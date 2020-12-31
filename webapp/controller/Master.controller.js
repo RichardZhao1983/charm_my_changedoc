@@ -57,7 +57,7 @@ sap.ui.define([
 				}.bind(this)
 			});
 
-//			this.initFilterView();
+			this.initFilterView();
 			this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 			this.getRouter().attachBypassed(this.onBypassed, this);
 		},
@@ -278,7 +278,7 @@ sap.ui.define([
 		_onMasterMatched :  function() {
 			//Set the layout property of the FCL control to 'OneColumn'
 			this.getModel("appView").setProperty("/layout", "OneColumn");
-//			this._applyFilter();
+			this._applyFilter();
 		},
 		
 		
@@ -293,13 +293,9 @@ sap.ui.define([
 			var bReplace = !Device.system.phone;
 			// set the layout property of FCL control to show two columns
 			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
-			
 			this.getRouter().navTo("object", {
-//				objectId : oItem.getBindingContext().getProperty("ObjectId"),
 				guid : oItem.getBindingContext().getProperty("GUID")
 			}, bReplace);
-			
-			
 		},
 
 		/**
@@ -397,6 +393,7 @@ sap.ui.define([
 				Coordinator : true,
 			});
 			this.setModel(filterViewModel, "filterView");
+			this._applyFilter();
 		},
 		
 		handleConfirm: function (oEvent) {
