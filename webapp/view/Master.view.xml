@@ -46,24 +46,23 @@
 				selectionChange=".onSelectionChange">
 				<headerToolbar>
 					<OverflowToolbar>
+						<DateRangeSelection id="createDateRange" showFooter="true"  width="210px" placeholder="Enter Create Date"/>
 						<SearchField
 							id="searchField"
 							showRefreshButton="true"
+							placeholder="Enter ObjectId or Company Code"
 							tooltip="{i18n>masterSearchTooltip}"
 							search=".onSearch"
 							width="auto">
 							<layoutData>
 								<OverflowToolbarLayoutData
 									minWidth="150px"
-									maxWidth="240px"
+									maxWidth="220px"
 									shrinkable="true"
 									priority="NeverOverflow"/>
 							</layoutData>
 						</SearchField>
 						<ToolbarSpacer/>
-						<Label text="Create Date: " labelFor="DRS3" width="100px"/>
-						<DateRangeSelection id="createDateRange" showFooter="true"  width="220px"/>
-						<Button icon="sap-icon://search" class="sapUiSmallMargin" press=".onCreateDateSearchButtonPress"/>
 					</OverflowToolbar>
 					
 				</headerToolbar>

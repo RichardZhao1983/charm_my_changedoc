@@ -1,0 +1,5 @@
+.sapMObjLAttrRow .sapMObjLAttrDiv span {
+    word-wrap: break-word;
+    overflow: inherit;
+    white-space: normal;
+}

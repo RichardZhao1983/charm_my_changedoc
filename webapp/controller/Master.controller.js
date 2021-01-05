@@ -94,16 +94,21 @@ sap.ui.define([
 				this.onRefresh();
 				return;
 			}
-
+			
+			var startDate = this.byId("createDateRange").getDateValue();
+			var endDate = this.byId("createDateRange").getSecondDateValue();
+			this._oListFilterState.aSearch = [];
 			var sQuery = oEvent.getParameter("query");
 			if (sQuery) {
 				var oFilter1 = new Filter("ObjectIdOrCountryCode", FilterOperator.Contains, sQuery);
-				this._oListFilterState.aSearch = [oFilter1];
-			} else {
-				this._oListFilterState.aSearch = [];
-			}
+				this._oListFilterState.aSearch.push(oFilter1);
+			} 
+			
+			if (startDate != null && endDate!= null) {
+				var oFilter2 = new Filter({path: "CreatedDate",  operator: FilterOperator.BT, value1: startDate, value2: endDate});
+				this._oListFilterState.aSearch.push(oFilter2);
+			} 
 			this._applyFilterSearch();
-
 		},
 		
 		/**
@@ -308,8 +313,6 @@ sap.ui.define([
 			// only update the counter if the length is final
 			if (this._oList.getBinding("items").isLengthFinal()) {
 				sTitle = this.getResourceBundle().getText("masterTitleCount", [iTotalItems]);
-				
-				
 				this.getModel("masterView").setProperty("/title", sTitle);
 			}
 		},
@@ -318,9 +321,7 @@ sap.ui.define([
 			this.oSemanticPage.setShowFooter(!this.oSemanticPage.getShowFooter());
 		},
 		
-		onFilterButtonPress : function() {
-//			this._openDialog("DialogPreselected", "filter");
-			
+		onFilterButtonPress : function() {		
 			if (!this.filterDialog) {
 				this.filterDialog = sap.ui.xmlfragment(
 						"zwx.sm.charm.urgentchange.view.FilterDialog", this);
@@ -363,7 +364,6 @@ sap.ui.define([
 			 	oFilterPOP = new Filter("POP",FilterOperator.EQ, currentUser),
 			 	oFilterCoordinator = new Filter("Coordinator",FilterOperator.EQ, currentUser);
 			
-//			var filterArray = [];
 			this._oListFilterState.aFilter = [];
 			var filterViewModel = this.getModel("filterView");
 			if(filterViewModel != null){
@@ -379,8 +379,6 @@ sap.ui.define([
 				if(filterViewModel.getData().Coordinator === true){
 					this._oListFilterState.aFilter.push(oFilterCoordinator);
 				}
-//				var aFilters = new Filter(filterArray, true);
-//				this._oList.getBinding("items").filter(aFilters);
 			}
 			this._applyFilterSearch();
 		},
@@ -393,7 +391,6 @@ sap.ui.define([
 				Coordinator : true,
 			});
 			this.setModel(filterViewModel, "filterView");
-			this._applyFilter();
 		},
 		
 		handleConfirm: function (oEvent) {

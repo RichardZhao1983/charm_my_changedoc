@@ -89,7 +89,7 @@
 										
 									<core:Title text="{i18n>FORM_TITLE_INFO}" />
 									<Label id="createDateLabel" text="{i18n>CREATE_DATE}"/>
-									<Input type="Text" value="{path: '/CreatedDate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'short'}}" enabled="false" width="150px"/>
+									<Input type="Text" value="{path: 'CreatedDate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" enabled="false" width="150px"/>
 									
 									
 									
@@ -162,17 +162,12 @@
 								<headerToolbar>
 									<OverflowToolbar>
 										<ToolbarSpacer/>
-<!-- 										<Button -->
-<!-- 											id="addButton" -->
-<!-- 											press=".onAddText" -->
-<!-- 											icon="sap-icon://add" -->
-<!-- 											type="Transparent"/> -->
 									</OverflowToolbar>
 								</headerToolbar>
 								<items>
 									<ObjectListItem type="Navigation" title="{TdName}" >
 										<attributes>
-											<ObjectAttribute text="{TextString}" />
+											<ObjectAttribute text="{TextString}" class="sapMObjLAttrRow"/>
 											<ObjectAttribute text="{TdidTxt}{DateTimeText}" />
 										</attributes>
 									</ObjectListItem>
@@ -191,7 +186,7 @@
 								id="fileupload" uploadEnabled="false" uploadButtonInvisible="false" instantUpload="false" multiple="false" uploadComplete="onUploadComplete" busyIndicatorDelay="0" items="{/AttachmentSet}">
 								<items>
 									<UploadCollectionItem documentId="{documentId}" mimeType="{mimeType}" fileName="{fileName}" enableDelete="{enableDelete}"
-										enableEdit="false" visibleEdit="false" visibleDelete="false" url="{url}">
+										enableEdit="false" visibleEdit="false" visibleDelete="false" url="{__metadata/media_src}">
 										<attributes>
 											<ObjectAttribute title="{i18n>UPLOADED_BY}" text="{contributor}"/>
 											<ObjectAttribute title="{i18n>UPLOADED_ON}" text="{path: 'uploadDate',formatter: '.util.dateTime'}"/>
@@ -207,16 +202,19 @@
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
 							<Table id="scopeTable" inset="false" items="{path: 'ScopeSet'}">
 								<columns>
-									<Column width="5rem">
+									<Column width="8rem">
 										<Text text="{i18n>SCOPE_TYPE}" />
 									</Column>
 									<Column width="5rem">
+										<Text text="{i18n>SCOPE_TRANSACTION_ID}" />
+									</Column>
+									<Column width="8rem">
 										<Text text="{i18n>SCOPE_TABLE_TITLE}" />
 									</Column>
-									<Column > 
+									<Column width="8rem"> 
 										<Text text="{i18n>SCOPE_PRODUCTIVE_SYSTEM}" />
 									</Column>
-									<Column>
+									<Column width="6rem">
 										<Text text="{i18n>SCOPE_STATUS}" />
 									</Column>
 								</columns>
@@ -224,6 +222,7 @@
 									<ColumnListItem>
 										<cells>
 											<ObjectIdentifier text="{Type}"/>
+											<Text text="{ObjectID}" />
 											<Text text="{Description}" />
 											<Text text="{ProductiveSystem}" />
 											<Text text="{Status}" />
@@ -236,39 +235,40 @@
 					
 					<IconTabFilter icon="sap-icon://calendar" iconColor="Neutral" id="dateFilter" text="{i18n>ICON_TAB_EFFORT}">
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
-								<Table id="EFFORTTable" inset="false"
-									items="{
-										path: 'EffortSet'
-										
-									}">
+								<Table id="effortTable" inset="false" items="{path: 'EffortSet'}">
 									<columns>
-										<Column width="5rem">
-											<Text text="{i18n>EFFORT_ID}" />
-										</Column>
-<!-- 										<Column > -->
-<!-- 											<Text text="Actions" /> -->
-<!-- 										</Column> -->
-										<Column width="5rem"> 
+										<Column minScreenWidth="Tablet" demandPopin="true">
 											<Text text="{i18n>EFFORT_TYPE}" />
 										</Column>
-										<Column>
+										<Column minScreenWidth="Tablet" demandPopin="true">
+											<Text text="{i18n>EFFORT_CREATEDBY}" />
+										</Column >
+										<Column minScreenWidth="Tablet" demandPopin="true">
+											<Text text="{i18n>EFFORT_TOTALCOST}" />
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true">
 											<Text text="{i18n>EFFORT_FUNCTION}" />
 										</Column>
 										<Column  minScreenWidth="Tablet" demandPopin="true">
 											<Text text="{i18n>EFFORT_DESCRIPTION}" />
 										</Column>
 										<Column  minScreenWidth="Tablet" demandPopin="true">
-											<Text text="{i18n>EFFORT_WORKUNIT}" />
+											<Text text="{i18n>EFFORT_WORK}" />
+										</Column>
+										<Column  minScreenWidth="Tablet" demandPopin="true">
+											<Text text="{i18n>EFFORT_UNIT}" />
 										</Column>
 									</columns>
 									<items>
 										<ColumnListItem>
 											<cells>
-												<ObjectIdentifier text="{Index}"/>
-												<Text text="{ActivityType}" />
+												<ObjectIdentifier text="{ActivityType}"/>
+												<Text text="{CreatedBy}" />
+												<Text text="{TotalCost}" />
 												<Text text="{Function}" />
 												<Text text="{Description}" />
-												<Text text="{Work}{Unit}" />
+												<Text text="{Work}" />
+												<Text text="{Unit}" />
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -309,25 +309,7 @@
 		<semantic:messagesIndicator>
 			<semantic:MessagesIndicator visible="true" press="onMessagesButtonPress"/>
 		</semantic:messagesIndicator>
-		
-		<semantic:footerCustomActions>
-<!-- 			<Button -->
-<!-- 				text="{i18n>ACTION_BUTTON}" -->
-<!-- 				class="sapUiSmallMargin" -->
-<!-- 				press=".onButtonPress"> -->
-<!-- 				<dependents> -->
-<!-- 					<core:Fragment -->
-<!-- 						fragmentName="zwx.sm.charm.urgentchange.view.ActionSheet" -->
-<!-- 						type="XML" /> -->
-<!-- 				</dependents> -->
-<!-- 			</Button> -->
-<!-- 			<Button -->
-<!-- 				text="Save" -->
-<!-- 				enabled="{= ${POP}.length !== 0 }" -->
-<!-- 				class="sapUiSmallMargin" -->
-<!-- 				press=".onSaveButtonTestPress"> -->
-<!-- 			</Button> -->
-		</semantic:footerCustomActions>
+
 	</semantic:SemanticPage>
 
 </mvc:View>
