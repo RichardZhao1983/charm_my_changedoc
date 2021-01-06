@@ -202,19 +202,19 @@
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
 							<Table id="scopeTable" inset="false" items="{path: 'ScopeSet'}">
 								<columns>
-									<Column width="8rem">
+									<Column minScreenWidth="phone" demandPopin="true">
 										<Text text="{i18n>SCOPE_TYPE}" />
 									</Column>
-									<Column width="5rem">
+									<Column minScreenWidth="phone" demandPopin="true">
 										<Text text="{i18n>SCOPE_TRANSACTION_ID}" />
 									</Column>
-									<Column width="8rem">
+									<Column minScreenWidth="phone" demandPopin="true">
 										<Text text="{i18n>SCOPE_TABLE_TITLE}" />
 									</Column>
-									<Column width="8rem"> 
+									<Column minScreenWidth="phone" demandPopin="true"> 
 										<Text text="{i18n>SCOPE_PRODUCTIVE_SYSTEM}" />
 									</Column>
-									<Column width="6rem">
+									<Column minScreenWidth="phone" demandPopin="true">
 										<Text text="{i18n>SCOPE_STATUS}" />
 									</Column>
 								</columns>
@@ -237,25 +237,25 @@
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
 								<Table id="effortTable" inset="false" items="{path: 'EffortSet'}">
 									<columns>
-										<Column minScreenWidth="Tablet" demandPopin="true">
+										<Column minScreenWidth="phone" demandPopin="true">
 											<Text text="{i18n>EFFORT_TYPE}" />
 										</Column>
-										<Column minScreenWidth="Tablet" demandPopin="true">
+										<Column minScreenWidth="phone" demandPopin="true">
 											<Text text="{i18n>EFFORT_CREATEDBY}" />
 										</Column >
-										<Column minScreenWidth="Tablet" demandPopin="true">
+										<Column minScreenWidth="phone" demandPopin="true">
 											<Text text="{i18n>EFFORT_TOTALCOST}" />
 										</Column>
-										<Column minScreenWidth="Tablet" demandPopin="true">
+										<Column minScreenWidth="phone" demandPopin="true">
 											<Text text="{i18n>EFFORT_FUNCTION}" />
 										</Column>
-										<Column  minScreenWidth="Tablet" demandPopin="true">
+										<Column  minScreenWidth="phone" demandPopin="true">
 											<Text text="{i18n>EFFORT_DESCRIPTION}" />
 										</Column>
-										<Column  minScreenWidth="Tablet" demandPopin="true">
+										<Column  minScreenWidth="phone" demandPopin="true">
 											<Text text="{i18n>EFFORT_WORK}" />
 										</Column>
-										<Column  minScreenWidth="Tablet" demandPopin="true">
+										<Column  minScreenWidth="phone" demandPopin="true">
 											<Text text="{i18n>EFFORT_UNIT}" />
 										</Column>
 									</columns>
