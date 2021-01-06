@@ -33,7 +33,6 @@ sap.ui.define([
 				delay: 0,
 				title: this.getResourceBundle().getText("detailTitle"),
 			});
-			this.initViewComponents();
 			this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 			this.setModel(oViewModel, "detailView");
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));

@@ -165,7 +165,7 @@
 									</OverflowToolbar>
 								</headerToolbar>
 								<items>
-									<ObjectListItem type="Navigation" title="{TdName}" >
+									<ObjectListItem type="Navigation" title="{TdfuserText}" >
 										<attributes>
 											<ObjectAttribute text="{TextString}" class="sapMObjLAttrRow"/>
 											<ObjectAttribute text="{TdidTxt}{DateTimeText}" />
@@ -183,7 +183,7 @@
 						text="{i18n>ICON_TAB_ATTACHMENTS}">
 						<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">
 							<UploadCollection noDataText="{i18n>ATTACHMENT_NO_DATA_TEXT}" change="onChange" fileDeleted="onDeleteFile" fileRenamed="onFileRenamed"
-								id="fileupload" uploadEnabled="false" uploadButtonInvisible="false" instantUpload="false" multiple="false" uploadComplete="onUploadComplete" busyIndicatorDelay="0" items="{/AttachmentSet}">
+								id="fileupload" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false" multiple="false" uploadComplete="onUploadComplete" busyIndicatorDelay="0" items="{AttachmentSet}">
 								<items>
 									<UploadCollectionItem documentId="{documentId}" mimeType="{mimeType}" fileName="{fileName}" enableDelete="{enableDelete}"
 										enableEdit="false" visibleEdit="false" visibleDelete="false" url="{__metadata/media_src}">
