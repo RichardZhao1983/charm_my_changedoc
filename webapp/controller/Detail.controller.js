@@ -40,8 +40,8 @@ sap.ui.define([
 		},
 
 		_onObjectMatched: function (oEvent) {
-			var sGUID = oEvent.getParameter("arguments").guid;
-			var sObjectPath = "WorkPackageSet(guid'" + sGUID + "')";
+			this.sGUID = oEvent.getParameter("arguments").guid;
+			var sObjectPath = "WorkPackageSet(guid'" + this.sGUID + "')";
 			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
 			this.getModel().metadataLoaded().then(function () {
 				this._bindView("/" + sObjectPath);
@@ -78,13 +78,15 @@ sap.ui.define([
 		_onBindingChange: function () {
 			var oView = this.getView(),
 				oElementBinding = oView.getElementBinding();
-
+			var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
+					
 			// No data for the binding
 			if (!oElementBinding.getBoundContext()) {
-				this.getRouter().getTargets().display("detailObjectNotFound");
 				// if object could not be found, the selection in the master list
 				// does not make sense anymore.
 				this.getOwnerComponent().oListSelector.clearMasterListSelection();
+				this.getRouter().navTo("master");
+				MessageToast.show(oResourceBundle.getText("objectIsNotAvailable", [this.sGUID]));	
 				return;
 			}
 
