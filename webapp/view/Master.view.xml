@@ -49,7 +49,7 @@
 						<DateRangeSelection id="createDateRange" showFooter="true"  width="210px" placeholder="Enter Create Date"/>
 						<SearchField
 							id="searchField"
-							showRefreshButton="true"
+							showRefreshButton="false"
 							placeholder="Enter ObjectId or Country Code"
 							tooltip="{i18n>masterSearchTooltip}"
 							search=".onSearch"
